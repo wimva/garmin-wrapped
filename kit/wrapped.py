@@ -2,7 +2,7 @@
 """Garmin Wrapped '26 — step 3: render wrapped.json into carousel slides (PNG stills and/or MP4 videos).
 
     python wrapped.py DATA_DIR/wrapped.json --out OUT_DIR --stills            # 10 PNGs, 2160x2700 (4:5)
-    python wrapped.py DATA_DIR/wrapped.json --out OUT_DIR --video --sheet     # 10 MP4s, 1080x1350, 6 s seamless loops
+    python wrapped.py DATA_DIR/wrapped.json --out OUT_DIR --video --sheet     # 10 MP4s (1080x1350, 6 s seamless loops) + the 10 PNGs
     python wrapped.py --check                   # fonts, backgrounds and video support (run this first)
     python wrapped.py ... --slides 3 4          # only some slides (handy in sandboxes with short time limits)
     python wrapped.py ... --sheet               # also writes contact_sheet.png to check the whole strip at once
@@ -655,7 +655,7 @@ def main():
     ap.add_argument('plan', nargs='?')
     ap.add_argument('--out', default='garmin_wrapped_out')
     ap.add_argument('--stills', action='store_true', help='PNG 2160x2700 per slide')
-    ap.add_argument('--video', action='store_true', help='MP4 1080x1350 per slide, 6 s seamless loop')
+    ap.add_argument('--video', action='store_true', help='MP4 1080x1350 per slide, 6 s seamless loop (+ the PNGs as a backup)')
     ap.add_argument('--slides', type=int, nargs='*')
     ap.add_argument('--sheet', action='store_true', help='contact_sheet.png with all slides, to check the result')
     ap.add_argument('--check', action='store_true', help='check fonts, backgrounds and video support, then exit')
@@ -679,11 +679,9 @@ def main():
         layer = sl.render(99)
         im = bg_still(i)
         im.paste(layer, (0, 0), layer)
-        if a.stills:
-            im.save(name + '.png', optimize=True)
-            print('png', name + '.png', flush=True)
-        else:
-            im.resize((W // 3, H // 3), Image.LANCZOS).save(name + '_thumb.jpg', quality=85)  # for the contact sheet
+        # PNG always: with --video the stills come along as a backup (Wim, 2026-11-20)
+        im.save(name + '.png', optimize=True)
+        print('png', name + '.png', flush=True)
         if a.video:
             write_video(i, layer.resize((W, H), Image.LANCZOS), name + '.mp4')
             print('mp4', name + '.mp4', flush=True)
@@ -691,7 +689,7 @@ def main():
         ims = []
         for i in range(len(slides)):
             base = os.path.join(a.out, f'garmin_wrapped_{year}_{i + 1:02d}')
-            p = base + '.png' if os.path.exists(base + '.png') else base + '_thumb.jpg'
+            p = base + '.png'
             if os.path.exists(p):
                 ims.append(Image.open(p).convert('RGB').resize((W // 3, H // 3)))
         if ims:
@@ -700,9 +698,6 @@ def main():
                 sheet.paste(im, (k * W // 3, 0))
             sheet.save(os.path.join(a.out, 'contact_sheet.png'))
             print('sheet', os.path.join(a.out, 'contact_sheet.png'))
-        for f in os.listdir(a.out):
-            if f.endswith('_thumb.jpg'):
-                os.remove(os.path.join(a.out, f))
 
 
 if __name__ == '__main__':

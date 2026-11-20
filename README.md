@@ -24,7 +24,8 @@ Garmin connector (MCP)  →  data/*.json  →  kit/compute.py  →  wrapped.json
 3. **Render:** `python kit/wrapped.py data/wrapped.json --out out --stills` (or `--video`) draws the data
    layer on top of pre-rendered three.js backgrounds. It needs Pillow, plus ffmpeg (or `imageio-ffmpeg`,
    or OpenCV) for video; `python kit/wrapped.py --check` says what's available. Animated slides keep the data
-   still and loop the moving background (6 s, seamless), one MP4 per slide, about 2 s per slide to render.
+   still and loop the moving background (6 s, seamless), one MP4 per slide plus the PNGs as a backup, about
+   2 s per slide to render.
 
 Design rules: [`STYLEGUIDE.md`](STYLEGUIDE.md).
 

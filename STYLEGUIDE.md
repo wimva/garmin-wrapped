@@ -77,6 +77,7 @@ never cuts a value.
 - The data layer (text, numbers, charts, avatar) is **static**: no build-in, no build-out. Every MP4 is exactly
   one 6 s background loop, so it loops seamlessly on its own on Instagram and TikTok.
 - One MP4 per slide (1080 × 1350, 25 fps, H.264), never one combined reel.
+- Animated always comes with the 10 PNGs as well, as a backup.
 
 ## Slide modules
 

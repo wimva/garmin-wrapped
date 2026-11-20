@@ -9,7 +9,8 @@ Make my **Garmin Wrapped '26**: a 10-slide Instagram/TikTok carousel of my Garmi
 until today, in the style of Spotify Wrapped. Use the Garmin School kit so it looks exactly right.
 
 **Step 0 — Ask me first, in one short message, then wait for my answer:**
-1. Stills (10 PNG images) or animated (10 short MP4 videos with a moving background that loop seamlessly)?
+1. Stills (10 PNG images) or animated (10 short MP4 videos with a moving background that loop seamlessly,
+   plus the same 10 slides as PNGs as a backup)?
 2. Which first name should be on slide 1? (Or none.)
 3. Can the fitness age slide show my real age next to my fitness age? (yes/no)
 4. Metric or imperial?
@@ -41,18 +42,18 @@ headline or body in `data/wrapped.json` to make it sound more like me, but keep 
 
 **Step 4 — Render with the kit's code** (never write your own renderer, never draw slides another way):
 - stills: `python kit/wrapped.py data/wrapped.json --out out --stills --sheet` → 10 PNGs
-- animated: `python kit/wrapped.py data/wrapped.json --out out --video --sheet` → 10 MP4s
+- animated: `python kit/wrapped.py data/wrapped.json --out out --video --sheet` → 10 MP4s + the same 10 PNGs
   (`garmin_wrapped_26_01.mp4` … `_10.mp4`, 6 s each; the data stays still and the 3D background moves in a
   seamless loop). It takes about 2 seconds per slide; if your environment still times out, run
   `--slides 1 2 3`, then `4 5 6`, then `7 8 9 10`.
 
-If I asked for animated, you must deliver MP4 files, not PNGs. If a step fails, show me the error and fix it.
+If I asked for animated, you must deliver the MP4 files (with the PNGs as a backup), never only PNGs. If a step fails, show me the error and fix it.
 Open `out/contact_sheet.png` and check every slide: no text cut off or overlapping, numbers match my data.
 Fix and re-render any slide that's wrong.
 
 **Step 5 — Deliver:** list the `out/` folder first to confirm the files exist. Then give me a download link
-for every file, in order 01 → 10 (the 10 MP4s if animated, the 10 PNGs if stills), plus one zip with all of
-them, and a short caption for my post that ends with "Made with the Garmin School prompt (@vawbe)". Don't
+for every file, in order 01 → 10 (animated: the 10 MP4s and the 10 PNGs; stills: the 10 PNGs), plus one zip
+with all of them, and a short caption for my post that ends with "Made with the Garmin School prompt (@vawbe)". Don't
 use official Garmin logos anywhere.
 
 **Privacy (always):** no weight, BMI, body composition, menstrual or food data, no addresses, no maps. The
