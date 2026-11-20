@@ -17,7 +17,9 @@ until today, in the style of Spotify Wrapped. Use the Garmin School kit so it lo
 **Step 1 — Get the kit.** In your code environment, download and unzip
 `https://github.com/wimva/garmin-wrapped/archive/refs/heads/main.zip`
 (mirror: `https://garmin.vaw.be/wrapped/garmin-wrapped-kit.zip`). If downloading is blocked, ask me to download
-that zip and upload it here, then continue. Read `kit/SCHEMA.md` before fetching anything.
+that zip and upload it here, then continue. Read `kit/SCHEMA.md` before fetching anything. Everything about
+this kit (steps, data format, style guide, example slides, the three.js scene) is also on
+`https://garmin.vaw.be/en/wrapped` and in `https://garmin.vaw.be/wrapped/manifest.json`: read those if anything is unclear.
 Install what is missing: `pip install pillow imageio-ffmpeg`.
 
 **Step 2 — Fetch my data with my Garmin tools** (Jan 1 → today). Follow `kit/SCHEMA.md`:

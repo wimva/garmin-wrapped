@@ -48,7 +48,7 @@ Never place text on a 3D shape except the intro title. A fine film grain sits on
 | hero number | Bebas Neue | up to 340 (auto-fits the width) |
 | headline | Bebas Neue, uppercase | 84–112 |
 | unit under a number | Bebas Neue | 104 |
-| body | Geist Regular | 40–46 |
+| body | Geist Regular, line height 1.22 (same as the Garmin School carousels) | 42 |
 | kicker above a headline | Geist SemiBold, uppercase, +2 tracking | 34 |
 | stat labels, pills, month letters | Geist Medium/SemiBold | 30–36 |
 | "BY THE GARMIN SCHOOL" tag | Geist SemiBold, uppercase | 30 |

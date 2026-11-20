@@ -3,7 +3,7 @@
 Your Garmin year as a Spotify Wrapped-style carousel for Instagram and TikTok: ten slides, stills or
 animated (every slide its own seamless loop), made by your own AI assistant (Claude or ChatGPT) from your own Garmin data.
 
-**Use it:** copy [`PROMPT.md`](PROMPT.md) into Claude or ChatGPT with a Garmin connector switched on.
+**Use it:** copy [`PROMPT.md`](PROMPT.md) (also on [garmin.vaw.be/en/wrapped](https://garmin.vaw.be/en/wrapped)) into Claude or ChatGPT with a Garmin connector switched on.
 That's all. The assistant downloads this kit, fetches your data, picks the slides that fit *your* year
 (running, cycling, rowing, strength, padel…) and hands you the PNGs or MP4s.
 
@@ -50,8 +50,7 @@ python kit/wrapped.py example/runner/wrapped.json --out out --video
 | `kit/assets/fonts/` | Bebas Neue and Geist (SIL Open Font License) |
 | `kit/assets/avatar.jpg` | Wim's avatar for the call-to-action slide |
 | `scene/` | the three.js + GSAP source of the backgrounds and `render_bg.py` to re-render them |
-| `tools/` | example data generator, kit zip builder |
-| `web/` | the page for garmin.vaw.be/wrapped (copy the prompt, download the kit) |
+| `tools/` | example data generator, `export_site.py` (publishes everything to garmin.vaw.be) |
 | `example/` | fake datasets (runner, cyclist, lifter) and their rendered slides |
 
 ## Changing the look
@@ -62,7 +61,7 @@ Edit `kit/style/tokens.json` (colours, sizes) and/or `scene/scene.html` (3D comp
 cd scene && npm install && cd ..
 python scene/render_bg.py --stills     # 10 × JPG
 python scene/render_bg.py --loops      # 10 × MP4 (about a minute per slide with software WebGL)
-bash tools/build_kit.sh                # web/garmin-wrapped-kit.zip for the website mirror
+python tools/export_site.py ../website-garmin   # kit zip, raw files, examples, scene → garmin.vaw.be/wrapped
 ```
 
 ## Privacy

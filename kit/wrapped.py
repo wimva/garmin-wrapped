@@ -195,7 +195,7 @@ class Slide:
     def body(self, dr, s, y, size=None, color=None, max_w=None, anchor='la', x=None):
         f = font('body', size or TYPE['body'], 400)
         lines = wrap(s, f, max_w or W - 2 * MX)
-        lh = (size or TYPE['body']) * 1.24
+        lh = (size or TYPE['body']) * 1.22   # Garmin School carousel body: Geist 42 / 1.22
         for k, ln in enumerate(lines):
             self.text(dr, ((x if x is not None else (W / 2 if anchor[0] == 'm' else MX)), y + k * lh), ln, f, color or self.ink, anchor)
         return y + len(lines) * lh
@@ -268,7 +268,7 @@ class Slide:
         if d.get('body'):
             end = [by]
             self.put(t, 0.95, lambda dr: end.__setitem__(0, self.body(dr, d['body'], by)))
-            by = by + 52 * len(wrap(d['body'], font('body', TYPE['body']), W - 2 * MX)) + 22
+            by = by + TYPE['body'] * 1.22 * len(wrap(d['body'], font('body', TYPE['body']), W - 2 * MX)) + 22
         stats = d.get('stats') or []
         if stats:
             sy = min(max(by + 18, 975), 990)
@@ -380,7 +380,7 @@ class Slide:
                     self.text(dr, (x, box[3] + 18), 'JFMAMJJASOND'[m.month - 1], f, self.inkA(0.75), 'mt')
                 m = (m.replace(day=28) + dt.timedelta(days=5)).replace(day=1)
         self.put(t, 0.9, months, rise=10)
-        self.put(t, 1.5, lambda dr: self.body(dr, d['body'], 1078, 40))
+        self.put(t, 1.5, lambda dr: self.body(dr, d['body'], 1078, TYPE['body']))
 
     def m_records(self, t, d):
         self.put(t, 0.1, lambda dr: self.kicker(dr, d['kicker']))
@@ -426,7 +426,7 @@ class Slide:
                         self.tri(dr, cx, yy + rowh / 2 + 2, cw * 0.2, fill=self.inkA(0.3))
                     day += dt.timedelta(days=1)
             self.put(t, 0.45 + 0.08 * m, row, dur=0.35, rise=16)
-        self.put(t, 1.5, lambda dr: self.body(dr, d['body'], top + months * rowh + 34, 40))
+        self.put(t, 1.5, lambda dr: self.body(dr, d['body'], top + months * rowh + 34, TYPE['body']))
 
     def m_clock(self, t, d):
         self.put(t, 0.1, lambda dr: self.kicker(dr, d['kicker']))
@@ -455,7 +455,7 @@ class Slide:
                 self.text(dr, (cx + rr * math.cos(a), cy + rr * math.sin(a)), lab, f, self.inkA(0.9), 'mm')
             self.text(dr, (cx, cy + 6), d['label'], font('display', fit(d['label'], 'display', 104, 2 * r0 - 30)), self.acc, 'mm')
         self.put(t, 0.45, dial, rise=0, dur=0.3)
-        self.put(t, 1.4, lambda dr: self.body(dr, d['body'], 1112, 40, anchor='ma'))
+        self.put(t, 1.4, lambda dr: self.body(dr, d['body'], 1112, TYPE['body'], anchor='ma'))
 
     def m_versus(self, t, d):
         self.put(t, 0.1, lambda dr: self.kicker(dr, d['kicker']))
@@ -468,7 +468,7 @@ class Slide:
         self.put(t, 0.75, lambda dr: (self.text(dr, (790, 640), str(rv), font('display', 320), self.acc, 'ms'),
                                       self.text(dr, (790, 700), R['label'].upper(), font('body', 36, 600), self.inkA(0.9), 'ms')), rise=50)
         self.put(t, 1.0, lambda dr: self.tri(dr, 540, 520, 46, fill=self.ink, rot=math.pi / 2), rise=0)
-        self.put(t, 1.4, lambda dr: self.body(dr, d['body'], 800, 46, anchor='ma', max_w=860))
+        self.put(t, 1.4, lambda dr: self.body(dr, d['body'], 800, TYPE['body'], anchor='ma', max_w=860))
 
     def m_zones(self, t, d):
         self.put(t, 0.1, lambda dr: self.kicker(dr, d['kicker']))
@@ -503,8 +503,8 @@ class Slide:
         for k, ln in enumerate(lines):
             self.put(t, 0.3 + 0.18 * k, lambda dr, k=k, ln=ln: self.text(dr, (MX - 4, 356 + k * size * 0.88), ln, font('display', size), self.acc if k == len(lines) - 1 else self.ink), rise=60)
         by = 356 + len(lines) * size * 0.88 + 40
-        self.put(t, 0.9, lambda dr: self.body(dr, d['body'], by, 44))
-        py = by + 52 * len(wrap(d['body'], font('body', 44), W - 2 * MX)) + 50
+        self.put(t, 0.9, lambda dr: self.body(dr, d['body'], by, TYPE['body']))
+        py = by + 42 * 1.22 * len(wrap(d['body'], font('body', TYPE['body']), W - 2 * MX)) + 50
         x = MX
         fp = font('body', 34, 600)
         for k, tr in enumerate(d.get('traits', [])):
@@ -534,7 +534,7 @@ class Slide:
         size = min(fit(l1, 'display', 128, 920), fit(l2, 'display', 128, 920))
         self.put(t, 0.5, lambda dr: self.text(dr, (W / 2, 735), l1, font('display', size), self.ink, 'ms'))
         self.put(t, 0.65, lambda dr: self.text(dr, (W / 2, 735 + size * 0.88), l2, font('display', size), self.acc, 'ms'))
-        self.put(t, 0.85, lambda dr: self.body(dr, d['body'], 872, 40, anchor='ma'))
+        self.put(t, 0.85, lambda dr: self.body(dr, d['body'], 872, TYPE['body'], anchor='ma'))
         fp = font('body', 34, 600)
         pills = [f'{a}  {b}' for a, b in d['handles']]
         ws = [tw(p, fp) + 56 for p in pills]
