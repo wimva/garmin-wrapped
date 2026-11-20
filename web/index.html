@@ -36,7 +36,7 @@ footer { padding: 40px 24px 64px; color: #bdb6d6; font-size: 16px; }
 </head>
 <body>
 <div class="hero"><div class="wrap">
-  <span class="pill">▲ BY THE GARMIN SCHOOL</span>
+  <span class="pill">BY THE GARMIN SCHOOL</span>
   <h1>Garmin<br><span>Wrapped '26</span></h1>
   <p class="lead">Your year on the wrist as a Spotify Wrapped-style carousel. Paste one prompt into Claude or ChatGPT,
   and your assistant turns your own Garmin data into 10 slides — stills or animated — for Instagram and TikTok. Free.</p>
@@ -56,7 +56,7 @@ footer { padding: 40px 24px 64px; color: #bdb6d6; font-size: 16px; }
 <img src="img/slide_08.jpg" alt="Example slide 8" loading="lazy">
 <img src="img/slide_09.jpg" alt="Example slide 9" loading="lazy">
 <img src="img/slide_10.jpg" alt="Example slide 10" loading="lazy"></div>
-<section><div class="wrap"><h2>Or animated</h2><video src="img/example_all.mp4" controls muted playsinline loop style="width:min(100%,432px);border-radius:14px"></video></div></section>
+<section><div class="wrap"><h2>Or animated</h2><p>Every slide is its own looping video.</p><div style="display:flex;gap:12px;flex-wrap:wrap"><video src="img/example_01.mp4" autoplay muted playsinline loop style="width:min(100%,320px);border-radius:14px"></video><video src="img/example_03.mp4" autoplay muted playsinline loop style="width:min(100%,320px);border-radius:14px"></video><video src="img/example_07.mp4" autoplay muted playsinline loop style="width:min(100%,320px);border-radius:14px"></video></div></div></section>
 <section><div class="wrap">
   <h2>How it works</h2>
   <div class="steps">
@@ -71,7 +71,7 @@ footer { padding: 40px 24px 64px; color: #bdb6d6; font-size: 16px; }
 until today, in the style of Spotify Wrapped. Use the Garmin School kit so it looks exactly right.
 
 **Step 0 — Ask me first, in one short message, then wait for my answer:**
-1. Stills (10 PNG images) or animated (10 MP4 videos + one combined video for TikTok/Reels)?
+1. Stills (10 PNG images) or animated (10 short MP4 videos that each loop seamlessly)?
 2. Which first name should be on slide 1? (Or none.)
 3. Can the fitness age slide show my real age next to my fitness age? (yes/no)
 4. Metric or imperial?
@@ -100,8 +100,8 @@ headline or body in `data/wrapped.json` to make it sound more like me, but keep 
 **Step 4 — Render:**
 - stills: `python kit/wrapped.py data/wrapped.json --out out --stills --sheet`
 - animated: `python kit/wrapped.py data/wrapped.json --out out --video --sheet` (render a few slides per
-  run with `--slides 1 2 3` if your environment has a time limit, then the rest; the combined video
-  appears once all 10 exist; also run `--stills` once so the contact sheet exists)
+  run with `--slides 1 2 3` if your environment has a time limit, then the rest; also run `--stills --sheet`
+  once so the contact sheet exists)
 
 Open `out/contact_sheet.png` and check every slide: no text cut off or overlapping, numbers match my data.
 Fix and re-render any slide that&#x27;s wrong.

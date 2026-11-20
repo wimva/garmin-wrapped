@@ -9,7 +9,7 @@ Make my **Garmin Wrapped '26**: a 10-slide Instagram/TikTok carousel of my Garmi
 until today, in the style of Spotify Wrapped. Use the Garmin School kit so it looks exactly right.
 
 **Step 0 — Ask me first, in one short message, then wait for my answer:**
-1. Stills (10 PNG images) or animated (10 MP4 videos + one combined video for TikTok/Reels)?
+1. Stills (10 PNG images) or animated (10 short MP4 videos that each loop seamlessly)?
 2. Which first name should be on slide 1? (Or none.)
 3. Can the fitness age slide show my real age next to my fitness age? (yes/no)
 4. Metric or imperial?
@@ -38,8 +38,8 @@ headline or body in `data/wrapped.json` to make it sound more like me, but keep 
 **Step 4 — Render:**
 - stills: `python kit/wrapped.py data/wrapped.json --out out --stills --sheet`
 - animated: `python kit/wrapped.py data/wrapped.json --out out --video --sheet` (render a few slides per
-  run with `--slides 1 2 3` if your environment has a time limit, then the rest; the combined video
-  appears once all 10 exist; also run `--stills` once so the contact sheet exists)
+  run with `--slides 1 2 3` if your environment has a time limit, then the rest; also run `--stills --sheet`
+  once so the contact sheet exists)
 
 Open `out/contact_sheet.png` and check every slide: no text cut off or overlapping, numbers match my data.
 Fix and re-render any slide that's wrong.

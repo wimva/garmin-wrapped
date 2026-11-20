@@ -1,7 +1,7 @@
 # Garmin Wrapped '26 — by the Garmin School
 
 Your Garmin year as a Spotify Wrapped-style carousel for Instagram and TikTok: ten slides, stills or
-animated, made by your own AI assistant (Claude or ChatGPT) from your own Garmin data.
+animated (every slide its own seamless loop), made by your own AI assistant (Claude or ChatGPT) from your own Garmin data.
 
 **Use it:** copy [`PROMPT.md`](PROMPT.md) into Claude or ChatGPT with a Garmin connector switched on.
 That's all. The assistant downloads this kit, fetches your data, picks the slides that fit *your* year

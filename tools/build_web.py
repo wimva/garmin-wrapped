@@ -17,11 +17,17 @@ for i in range(1, 11):
     if os.path.exists(p):
         Image.open(p).convert('RGB').resize((720, 900), Image.LANCZOS).save(os.path.join(WEB, 'img', f'slide_{i:02d}.jpg'), quality=86)
         imgs.append(f'img/slide_{i:02d}.jpg')
-for v in ('garmin_wrapped_26_all.mp4',):
-    if os.path.exists(os.path.join(src, v)):
-        shutil.copy(os.path.join(src, v), os.path.join(WEB, 'img', 'example_all.mp4'))
+for k in (1, 3, 7):
+    v = os.path.join(src, f'garmin_wrapped_26_{k:02d}.mp4')
+    if os.path.exists(v):
+        shutil.copy(v, os.path.join(WEB, 'img', f'example_{k:02d}.mp4'))
+if os.path.exists(os.path.join(WEB, 'img', 'example_all.mp4')):
+    os.remove(os.path.join(WEB, 'img', 'example_all.mp4'))
 
-video = ('<section><div class="wrap"><h2>Or animated</h2><video src="img/example_all.mp4" controls muted playsinline loop style="width:min(100%,432px);border-radius:14px"></video></div></section>' if os.path.exists(os.path.join(WEB, 'img', 'example_all.mp4')) else '')
+vids = [f'img/example_{k:02d}.mp4' for k in (1, 3, 7) if os.path.exists(os.path.join(WEB, 'img', f'example_{k:02d}.mp4'))]
+video = ('<section><div class="wrap"><h2>Or animated</h2><p>Every slide is its own looping video.</p><div style="display:flex;gap:12px;flex-wrap:wrap">'
+         + ''.join(f'<video src="{v}" autoplay muted playsinline loop style="width:min(100%,320px);border-radius:14px"></video>' for v in vids)
+         + '</div></div></section>') if vids else ''
 prompt = open(os.path.join(ROOT, 'PROMPT.md')).read().split('\n---\n')[1].strip()
 cards = '\n'.join(f'<img src="{p}" alt="Example slide {k + 1}" loading="lazy">' for k, p in enumerate(imgs))
 page = f'''<!DOCTYPE html>
@@ -62,7 +68,7 @@ footer {{ padding: 40px 24px 64px; color: #bdb6d6; font-size: 16px; }}
 </head>
 <body>
 <div class="hero"><div class="wrap">
-  <span class="pill">▲ BY THE GARMIN SCHOOL</span>
+  <span class="pill">BY THE GARMIN SCHOOL</span>
   <h1>Garmin<br><span>Wrapped '26</span></h1>
   <p class="lead">Your year on the wrist as a Spotify Wrapped-style carousel. Paste one prompt into Claude or ChatGPT,
   and your assistant turns your own Garmin data into 10 slides — stills or animated — for Instagram and TikTok. Free.</p>

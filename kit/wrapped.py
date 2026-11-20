@@ -2,7 +2,7 @@
 """Garmin Wrapped '26 — step 3: render wrapped.json into carousel slides (PNG stills and/or MP4 videos).
 
     python wrapped.py DATA_DIR/wrapped.json --out OUT_DIR --stills            # 10 PNGs, 2160x2700 (4:5)
-    python wrapped.py DATA_DIR/wrapped.json --out OUT_DIR --video             # 10 MP4s, 1080x1350, 6 s
+    python wrapped.py DATA_DIR/wrapped.json --out OUT_DIR --video             # 10 MP4s, 1080x1350, 6 s seamless loops
     python wrapped.py ... --slides 3 4          # only some slides (handy in sandboxes with short time limits)
     python wrapped.py ... --sheet               # also writes contact_sheet.png to check the whole strip at once
 
@@ -23,7 +23,8 @@ TYPE = TOK['type']
 MIN_PX = TYPE['minimum']                          # Garmin School rule: never smaller than this
 FONT_DIR = os.path.join(HERE, 'assets', 'fonts')
 BG_DIR = os.path.join(HERE, 'assets', 'bg')
-STATIC_AFTER = 3.0                                # all reveals are done after 3 s; later frames reuse the overlay
+STATIC_AFTER = 3.0                                # all reveals are done after 3 s; frames until OUT_START reuse the overlay
+OUT_START, OUT_DUR = SECONDS - 0.85, 0.6          # then everything clears, so each MP4 loops seamlessly on its own
 
 
 # ============================================================================================ helpers
@@ -124,7 +125,7 @@ class Slide:
 
     # every element is drawn through put(): it fades in and rises while t < t0 + dur
     def put(self, t, t0, fn, dur=0.55, rise=40):
-        e = ease(t, t0, dur)
+        e = ease(t, t0, dur) * (1 - ease(t, OUT_START, OUT_DUR))
         if e <= 0:
             return
         if e >= 1:
@@ -169,9 +170,8 @@ class Slide:
         label = 'BY THE GARMIN SCHOOL'
         w = sum(tw(c, f) for c in label) + 1.6 * (len(label) - 1)
         x0, y0, h = MX, TOK['layout']['tag_top'], 58
-        self.rrect(dr, (x0, y0, x0 + w + 78, y0 + h), h / 2, fill=self.ink)
-        self.tri(dr, x0 + 30, y0 + h / 2 + 2, 10, fill=self.bg)
-        self.text(dr, (x0 + 52, y0 + h / 2 + 1), label, f, self.bg, 'lm', tracking=1.6)
+        self.rrect(dr, (x0, y0, x0 + w + 56, y0 + h), h / 2, fill=self.ink)
+        self.text(dr, (x0 + 28, y0 + h / 2 + 1), label, f, self.bg, 'lm', tracking=1.6)
         # progress: ten small triangles, current one filled
         for k in range(self.n):
             cx = W - MX - (self.n - 1 - k) * 27
@@ -518,7 +518,7 @@ class Slide:
             x += w_ + 18
 
     def m_cta(self, t, d):
-        cx, cy, R = W / 2, 452, 132
+        cx, cy, R = W / 2, 420, 170
         g = ease(t, 0.15, 0.7)
         def avatar(dr):
             av = Image.open(os.path.join(HERE, 'assets', 'avatar.jpg')).convert('RGB')
@@ -529,7 +529,6 @@ class Slide:
             ImageDraw.Draw(m).ellipse([0, 0, D - 1, D - 1], fill=255)
             self.img.paste(av, (int((cx - rr) * S), int((cy - rr) * S)), m)
             dr.ellipse([(cx - rr - 9) * S, (cy - rr - 9) * S, (cx + rr + 9) * S, (cy + rr + 9) * S], outline=self.ink, width=int(8 * S))
-            self.tri(dr, cx, cy, 2 * (rr + 26), outline=self.acc, width=9, rot=0)
         self.put(t, 0.15, avatar, rise=0, dur=0.3)
         l1, l2 = [s.upper() for s in d['title']]
         size = min(fit(l1, 'display', 128, 920), fit(l2, 'display', 128, 920))
@@ -645,7 +644,6 @@ def main():
     ap.add_argument('--stills', action='store_true')
     ap.add_argument('--video', action='store_true')
     ap.add_argument('--slides', type=int, nargs='*')
-    ap.add_argument('--seconds', type=float, default=SECONDS)
     ap.add_argument('--sheet', action='store_true')
     a = ap.parse_args()
     if not (a.stills or a.video):
@@ -660,38 +658,27 @@ def main():
         name = os.path.join(a.out, f'garmin_wrapped_{year}_{i + 1:02d}')
         if a.stills:
             im = bg_still(i)
-            im.paste(sl.render(99), (0, 0), sl.img)
+            im.paste(sl.render(OUT_START - 0.05), (0, 0), sl.img)  # fully revealed, before the loop clears
             im.save(name + '.png', optimize=True)
             print('png', name + '.png', flush=True)
         if a.video:
-            n = int(round(a.seconds * FPS))
+            n = int(round(SECONDS * FPS))  # = one background loop, so the clip loops seamlessly
             enc = Encoder(name + '.mp4')
             static = None
             for k, bg in enumerate(bg_frames(i, n)):
                 t = k / FPS
-                if t >= STATIC_AFTER and static is not None:
+                hold = STATIC_AFTER <= t < OUT_START
+                if hold and static is not None:
                     ov = static
                 else:
                     ov = sl.render(t).resize((W, H), Image.LANCZOS)
-                    if t >= STATIC_AFTER:
+                    if hold:
                         static = ov
                 fr = bg.copy()
                 fr.paste(ov, (0, 0), ov)
                 enc.write(fr)
             enc.close()
             print('mp4', name + '.mp4', flush=True)
-    if a.video:
-        clips = [os.path.join(a.out, f'garmin_wrapped_{year}_{i + 1:02d}.mp4') for i in range(len(slides))]
-        exe = ffmpeg_exe()
-        if exe and all(os.path.exists(c) for c in clips):
-            # one vertical-friendly video of all 10 slides (for TikTok / Reels, where a carousel of videos isn't possible)
-            lst = os.path.join(a.out, '_concat.txt')
-            with open(lst, 'w') as fh:
-                fh.writelines(f"file '{os.path.abspath(c)}'\n" for c in clips)
-            allp = os.path.join(a.out, f'garmin_wrapped_{year}_all.mp4')
-            subprocess.run([exe, '-v', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', lst, '-c', 'copy', allp])
-            os.remove(lst)
-            print('mp4', allp, flush=True)
     if a.sheet:
         ims = []
         for i in range(len(slides)):

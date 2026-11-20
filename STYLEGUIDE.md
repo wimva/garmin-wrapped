@@ -12,12 +12,14 @@ shape always sits half on one slide and half on the next. Swiping feels like one
 The motif is the **triangle**: a nod to the navigation delta every Garmin user knows, never the logo itself.
 Rounded 3D prisms, triangle rings, tetrahedra and triangle confetti in the background (three.js, GSAP
 motion), and triangles in the data layer: bullets, chart markers, the calendar grid, the podium, the
-progress indicator, the play-arrow on the fitness-age slide.
+progress indicator, the play-arrow on the fitness-age slide. (Not in the Garmin School pill and not around
+the avatar: those stay clean.)
 
 ## Format
 
 - 4:5, artboard 1080 × 1350 (the Garmin School carousel format), one carousel for Instagram and TikTok.
-- Stills: PNG 2160 × 2700. Animated: MP4 1080 × 1350, 25 fps, 6 s per slide, plus `_all.mp4` with all ten.
+- Stills: PNG 2160 × 2700. Animated: one MP4 per slide, 1080 × 1350, 25 fps, 6 s, looping seamlessly on its own
+  (no combined reel: post the ten clips as one carousel).
 - Ten slides: 1 intro, 2–9 data (picked per athlete), 10 call to action.
 
 ## Colour (per slide, `kit/style/tokens.json`)
@@ -57,13 +59,13 @@ never cuts a value.
 ## Layout
 
 - Margins 80 px left/right.
-- Top bar on **every** slide: the `▲ BY THE GARMIN SCHOOL` pill top-left (ink fill, background-coloured text)
+- Top bar on **every** slide: the `BY THE GARMIN SCHOOL` pill top-left (text only, no icon) (ink fill, background-coloured text)
   and ten small triangles top-right showing the position (current one filled).
 - Kicker at y 178, headline at y 226, content from y ~330 to ~1150.
 - The bottom band (y > 1150) belongs to the seam shapes and confetti: no text there except the intro footer.
 - Slide 1 has the word "Garmin" (in the title), one hook stat and a two-line footer with the arrow →
   after line 1 (the Garmin School carousel rule).
-- Slide 10: avatar in a triangle frame, "MAKE YOUR OWN / GARMIN WRAPPED", "Free prompt from the Garmin
+- Slide 10: avatar in a plain circle with an ink ring (no triangle around it), "MAKE YOUR OWN / GARMIN WRAPPED", "Free prompt from the Garmin
   School", pills with Instagram @vawbe · TikTok @vaw.be · YouTube @vawbe, and garmin.vaw.be.
 
 ## Motion (animated version)
@@ -72,7 +74,9 @@ never cuts a value.
   confetti orbits and spins.
 - Data layer: kicker → headline → number, staggered 0.1–0.4 s; elements rise 40 px while fading in
   (ease-out cubic); numbers count up with an exponential ease over ~1.6 s; lines and routes draw on; the
-  calendar fills month by month; podium triangles grow. Everything has settled by 3 s; the last 3 s hold.
+  calendar fills month by month; podium triangles grow. Everything has settled by 3 s and holds; in the
+  last 0.85 s it clears again (reverse fade), so the last frame equals the first and the clip loops seamlessly
+  on Instagram and TikTok. The background loop is exactly 6 s, the same length as the clip.
 
 ## Slide modules
 
