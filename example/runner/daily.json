@@ -1,0 +1,2918 @@
+[
+{
+"date": "2026-01-01",
+"steps": 14033,
+"steps_goal": 10000,
+"floors": 7,
+"rhr": 59,
+"intensity_min": 58,
+"active_kcal": 600
+},
+{
+"date": "2026-01-02",
+"steps": 13272,
+"steps_goal": 10000,
+"floors": 14,
+"rhr": 57,
+"intensity_min": 1,
+"active_kcal": 444
+},
+{
+"date": "2026-01-03",
+"steps": 9628,
+"steps_goal": 10000,
+"floors": 5,
+"rhr": 57,
+"intensity_min": 12,
+"active_kcal": 308
+},
+{
+"date": "2026-01-04",
+"steps": 10812,
+"steps_goal": 10000,
+"floors": 8,
+"rhr": 60,
+"intensity_min": 45,
+"active_kcal": 622
+},
+{
+"date": "2026-01-05",
+"steps": 9323,
+"steps_goal": 10000,
+"floors": 7,
+"rhr": 59,
+"intensity_min": 21,
+"active_kcal": 542
+},
+{
+"date": "2026-01-06",
+"steps": 13737,
+"steps_goal": 10000,
+"floors": 15,
+"rhr": 57,
+"intensity_min": 60,
+"active_kcal": 519
+},
+{
+"date": "2026-01-07",
+"steps": 9815,
+"steps_goal": 10000,
+"floors": 19,
+"rhr": 56,
+"intensity_min": 58,
+"active_kcal": 818
+},
+{
+"date": "2026-01-08",
+"steps": 11267,
+"steps_goal": 10000,
+"floors": 18,
+"rhr": 56,
+"intensity_min": 24,
+"active_kcal": 319
+},
+{
+"date": "2026-01-09",
+"steps": 13303,
+"steps_goal": 10000,
+"floors": 19,
+"rhr": 59,
+"intensity_min": 48,
+"active_kcal": 362
+},
+{
+"date": "2026-01-10",
+"steps": 8137,
+"steps_goal": 10000,
+"floors": 7,
+"rhr": 56,
+"intensity_min": 33,
+"active_kcal": 729
+},
+{
+"date": "2026-01-11",
+"steps": 8224,
+"steps_goal": 10000,
+"floors": 10,
+"rhr": 57,
+"intensity_min": 46,
+"active_kcal": 319
+},
+{
+"date": "2026-01-12",
+"steps": 14173,
+"steps_goal": 10000,
+"floors": 20,
+"rhr": 59,
+"intensity_min": 60,
+"active_kcal": 282
+},
+{
+"date": "2026-01-13",
+"steps": 9552,
+"steps_goal": 10000,
+"floors": 14,
+"rhr": 59,
+"intensity_min": 47,
+"active_kcal": 436
+},
+{
+"date": "2026-01-14",
+"steps": 5588,
+"steps_goal": 10000,
+"floors": 13,
+"rhr": 58,
+"intensity_min": 17,
+"active_kcal": 446
+},
+{
+"date": "2026-01-15",
+"steps": 11943,
+"steps_goal": 10000,
+"floors": 15,
+"rhr": 60,
+"intensity_min": 29,
+"active_kcal": 317
+},
+{
+"date": "2026-01-16",
+"steps": 14018,
+"steps_goal": 10000,
+"floors": 10,
+"rhr": 57,
+"intensity_min": 60,
+"active_kcal": 456
+},
+{
+"date": "2026-01-17",
+"steps": 8411,
+"steps_goal": 10000,
+"floors": 4,
+"rhr": 58,
+"intensity_min": 20,
+"active_kcal": 494
+},
+{
+"date": "2026-01-18",
+"steps": 7197,
+"steps_goal": 10000,
+"floors": 16,
+"rhr": 56,
+"intensity_min": 30,
+"active_kcal": 825
+},
+{
+"date": "2026-01-19",
+"steps": 11910,
+"steps_goal": 10000,
+"floors": 5,
+"rhr": 56,
+"intensity_min": 54,
+"active_kcal": 421
+},
+{
+"date": "2026-01-20",
+"steps": 8729,
+"steps_goal": 10000,
+"floors": 8,
+"rhr": 60,
+"intensity_min": 34,
+"active_kcal": 667
+},
+{
+"date": "2026-01-21",
+"steps": 9870,
+"steps_goal": 10000,
+"floors": 9,
+"rhr": 59,
+"intensity_min": 53,
+"active_kcal": 325
+},
+{
+"date": "2026-01-22",
+"steps": 9109,
+"steps_goal": 10000,
+"floors": 11,
+"rhr": 58,
+"intensity_min": 67,
+"active_kcal": 850
+},
+{
+"date": "2026-01-23",
+"steps": 7195,
+"steps_goal": 10000,
+"floors": 12,
+"rhr": 58,
+"intensity_min": 23,
+"active_kcal": 511
+},
+{
+"date": "2026-01-24",
+"steps": 12167,
+"steps_goal": 10000,
+"floors": 5,
+"rhr": 58,
+"intensity_min": 60,
+"active_kcal": 467
+},
+{
+"date": "2026-01-25",
+"steps": 8612,
+"steps_goal": 10000,
+"floors": 9,
+"rhr": 58,
+"intensity_min": 41,
+"active_kcal": 488
+},
+{
+"date": "2026-01-26",
+"steps": 6725,
+"steps_goal": 10000,
+"floors": 6,
+"rhr": 59,
+"intensity_min": 26,
+"active_kcal": 805
+},
+{
+"date": "2026-01-27",
+"steps": 7955,
+"steps_goal": 10000,
+"floors": 19,
+"rhr": 59,
+"intensity_min": 16,
+"active_kcal": 477
+},
+{
+"date": "2026-01-28",
+"steps": 8013,
+"steps_goal": 10000,
+"floors": 6,
+"rhr": 58,
+"intensity_min": 58,
+"active_kcal": 590
+},
+{
+"date": "2026-01-29",
+"steps": 13059,
+"steps_goal": 10000,
+"floors": 4,
+"rhr": 58,
+"intensity_min": 20,
+"active_kcal": 653
+},
+{
+"date": "2026-01-30",
+"steps": 12284,
+"steps_goal": 10000,
+"floors": 22,
+"rhr": 59,
+"intensity_min": 25,
+"active_kcal": 628
+},
+{
+"date": "2026-01-31",
+"steps": 11475,
+"steps_goal": 10000,
+"floors": 22,
+"rhr": 56,
+"intensity_min": 1,
+"active_kcal": 859
+},
+{
+"date": "2026-02-01",
+"steps": 10447,
+"steps_goal": 10000,
+"floors": 11,
+"rhr": 56,
+"intensity_min": 29,
+"active_kcal": 428
+},
+{
+"date": "2026-02-02",
+"steps": 14393,
+"steps_goal": 10000,
+"floors": 10,
+"rhr": 56,
+"intensity_min": 42,
+"active_kcal": 325
+},
+{
+"date": "2026-02-03",
+"steps": 11273,
+"steps_goal": 10000,
+"floors": 6,
+"rhr": 57,
+"intensity_min": 33,
+"active_kcal": 343
+},
+{
+"date": "2026-02-04",
+"steps": 8689,
+"steps_goal": 10000,
+"floors": 20,
+"rhr": 58,
+"intensity_min": 24,
+"active_kcal": 869
+},
+{
+"date": "2026-02-05",
+"steps": 8000,
+"steps_goal": 10000,
+"floors": 4,
+"rhr": 56,
+"intensity_min": 9,
+"active_kcal": 733
+},
+{
+"date": "2026-02-06",
+"steps": 6060,
+"steps_goal": 10000,
+"floors": 11,
+"rhr": 58,
+"intensity_min": 60,
+"active_kcal": 828
+},
+{
+"date": "2026-02-07",
+"steps": 7972,
+"steps_goal": 10000,
+"floors": 12,
+"rhr": 57,
+"intensity_min": 66,
+"active_kcal": 795
+},
+{
+"date": "2026-02-08",
+"steps": 10256,
+"steps_goal": 10000,
+"floors": 18,
+"rhr": 58,
+"intensity_min": 23,
+"active_kcal": 459
+},
+{
+"date": "2026-02-09",
+"steps": 15959,
+"steps_goal": 10000,
+"floors": 8,
+"rhr": 56,
+"intensity_min": 28,
+"active_kcal": 724
+},
+{
+"date": "2026-02-10",
+"steps": 11286,
+"steps_goal": 10000,
+"floors": 20,
+"rhr": 58,
+"intensity_min": 7,
+"active_kcal": 873
+},
+{
+"date": "2026-02-11",
+"steps": 12057,
+"steps_goal": 10000,
+"floors": 11,
+"rhr": 57,
+"intensity_min": 25,
+"active_kcal": 578
+},
+{
+"date": "2026-02-12",
+"steps": 9729,
+"steps_goal": 10000,
+"floors": 6,
+"rhr": 56,
+"intensity_min": 8,
+"active_kcal": 888
+},
+{
+"date": "2026-02-13",
+"steps": 10799,
+"steps_goal": 10000,
+"floors": 19,
+"rhr": 59,
+"intensity_min": 53,
+"active_kcal": 630
+},
+{
+"date": "2026-02-14",
+"steps": 14624,
+"steps_goal": 10000,
+"floors": 6,
+"rhr": 58,
+"intensity_min": 35,
+"active_kcal": 386
+},
+{
+"date": "2026-02-15",
+"steps": 6869,
+"steps_goal": 10000,
+"floors": 13,
+"rhr": 58,
+"intensity_min": 43,
+"active_kcal": 697
+},
+{
+"date": "2026-02-16",
+"steps": 12433,
+"steps_goal": 10000,
+"floors": 8,
+"rhr": 57,
+"intensity_min": 9,
+"active_kcal": 573
+},
+{
+"date": "2026-02-17",
+"steps": 12441,
+"steps_goal": 10000,
+"floors": 17,
+"rhr": 58,
+"intensity_min": 46,
+"active_kcal": 376
+},
+{
+"date": "2026-02-18",
+"steps": 16171,
+"steps_goal": 10000,
+"floors": 16,
+"rhr": 57,
+"intensity_min": 23,
+"active_kcal": 868
+},
+{
+"date": "2026-02-19",
+"steps": 11406,
+"steps_goal": 10000,
+"floors": 19,
+"rhr": 56,
+"intensity_min": 65,
+"active_kcal": 596
+},
+{
+"date": "2026-02-20",
+"steps": 13954,
+"steps_goal": 10000,
+"floors": 14,
+"rhr": 56,
+"intensity_min": 43,
+"active_kcal": 442
+},
+{
+"date": "2026-02-21",
+"steps": 7856,
+"steps_goal": 10000,
+"floors": 12,
+"rhr": 58,
+"intensity_min": 4,
+"active_kcal": 584
+},
+{
+"date": "2026-02-22",
+"steps": 8688,
+"steps_goal": 10000,
+"floors": 16,
+"rhr": 56,
+"intensity_min": 29,
+"active_kcal": 262
+},
+{
+"date": "2026-02-23",
+"steps": 14474,
+"steps_goal": 10000,
+"floors": 5,
+"rhr": 59,
+"intensity_min": 21,
+"active_kcal": 404
+},
+{
+"date": "2026-02-24",
+"steps": 11143,
+"steps_goal": 10000,
+"floors": 21,
+"rhr": 58,
+"intensity_min": 7,
+"active_kcal": 603
+},
+{
+"date": "2026-02-25",
+"steps": 14374,
+"steps_goal": 10000,
+"floors": 21,
+"rhr": 58,
+"intensity_min": 6,
+"active_kcal": 810
+},
+{
+"date": "2026-02-26",
+"steps": 8775,
+"steps_goal": 10000,
+"floors": 14,
+"rhr": 57,
+"intensity_min": 59,
+"active_kcal": 469
+},
+{
+"date": "2026-02-27",
+"steps": 6728,
+"steps_goal": 10000,
+"floors": 4,
+"rhr": 56,
+"intensity_min": 9,
+"active_kcal": 879
+},
+{
+"date": "2026-02-28",
+"steps": 13108,
+"steps_goal": 10000,
+"floors": 16,
+"rhr": 56,
+"intensity_min": 60,
+"active_kcal": 576
+},
+{
+"date": "2026-03-01",
+"steps": 8599,
+"steps_goal": 10000,
+"floors": 20,
+"rhr": 55,
+"intensity_min": 57,
+"active_kcal": 676
+},
+{
+"date": "2026-03-02",
+"steps": 8818,
+"steps_goal": 10000,
+"floors": 7,
+"rhr": 58,
+"intensity_min": 4,
+"active_kcal": 722
+},
+{
+"date": "2026-03-03",
+"steps": 12372,
+"steps_goal": 10000,
+"floors": 20,
+"rhr": 58,
+"intensity_min": 45,
+"active_kcal": 353
+},
+{
+"date": "2026-03-04",
+"steps": 4953,
+"steps_goal": 10000,
+"floors": 17,
+"rhr": 56,
+"intensity_min": 9,
+"active_kcal": 676
+},
+{
+"date": "2026-03-05",
+"steps": 10638,
+"steps_goal": 10000,
+"floors": 4,
+"rhr": 58,
+"intensity_min": 18,
+"active_kcal": 869
+},
+{
+"date": "2026-03-06",
+"steps": 13736,
+"steps_goal": 10000,
+"floors": 9,
+"rhr": 56,
+"intensity_min": 70,
+"active_kcal": 365
+},
+{
+"date": "2026-03-07",
+"steps": 13438,
+"steps_goal": 10000,
+"floors": 10,
+"rhr": 57,
+"intensity_min": 19,
+"active_kcal": 823
+},
+{
+"date": "2026-03-08",
+"steps": 12999,
+"steps_goal": 10000,
+"floors": 12,
+"rhr": 56,
+"intensity_min": 27,
+"active_kcal": 775
+},
+{
+"date": "2026-03-09",
+"steps": 9508,
+"steps_goal": 10000,
+"floors": 11,
+"rhr": 57,
+"intensity_min": 29,
+"active_kcal": 779
+},
+{
+"date": "2026-03-10",
+"steps": 10176,
+"steps_goal": 10000,
+"floors": 18,
+"rhr": 58,
+"intensity_min": 27,
+"active_kcal": 529
+},
+{
+"date": "2026-03-11",
+"steps": 9366,
+"steps_goal": 10000,
+"floors": 6,
+"rhr": 59,
+"intensity_min": 53,
+"active_kcal": 395
+},
+{
+"date": "2026-03-12",
+"steps": 6913,
+"steps_goal": 10000,
+"floors": 10,
+"rhr": 56,
+"intensity_min": 52,
+"active_kcal": 615
+},
+{
+"date": "2026-03-13",
+"steps": 11866,
+"steps_goal": 10000,
+"floors": 14,
+"rhr": 56,
+"intensity_min": 37,
+"active_kcal": 438
+},
+{
+"date": "2026-03-14",
+"steps": 8335,
+"steps_goal": 10000,
+"floors": 20,
+"rhr": 56,
+"intensity_min": 65,
+"active_kcal": 398
+},
+{
+"date": "2026-03-15",
+"steps": 8403,
+"steps_goal": 10000,
+"floors": 17,
+"rhr": 56,
+"intensity_min": 50,
+"active_kcal": 405
+},
+{
+"date": "2026-03-16",
+"steps": 11035,
+"steps_goal": 10000,
+"floors": 20,
+"rhr": 58,
+"intensity_min": 51,
+"active_kcal": 692
+},
+{
+"date": "2026-03-17",
+"steps": 14358,
+"steps_goal": 10000,
+"floors": 15,
+"rhr": 58,
+"intensity_min": 51,
+"active_kcal": 584
+},
+{
+"date": "2026-03-18",
+"steps": 6826,
+"steps_goal": 10000,
+"floors": 13,
+"rhr": 55,
+"intensity_min": 3,
+"active_kcal": 881
+},
+{
+"date": "2026-03-19",
+"steps": 12307,
+"steps_goal": 10000,
+"floors": 21,
+"rhr": 58,
+"intensity_min": 41,
+"active_kcal": 738
+},
+{
+"date": "2026-03-20",
+"steps": 10697,
+"steps_goal": 10000,
+"floors": 16,
+"rhr": 55,
+"intensity_min": 68,
+"active_kcal": 262
+},
+{
+"date": "2026-03-21",
+"steps": 9660,
+"steps_goal": 10000,
+"floors": 10,
+"rhr": 55,
+"intensity_min": 17,
+"active_kcal": 400
+},
+{
+"date": "2026-03-22",
+"steps": 15973,
+"steps_goal": 10000,
+"floors": 7,
+"rhr": 59,
+"intensity_min": 70,
+"active_kcal": 814
+},
+{
+"date": "2026-03-23",
+"steps": 11914,
+"steps_goal": 10000,
+"floors": 16,
+"rhr": 57,
+"intensity_min": 22,
+"active_kcal": 861
+},
+{
+"date": "2026-03-24",
+"steps": 12648,
+"steps_goal": 10000,
+"floors": 9,
+"rhr": 55,
+"intensity_min": 20,
+"active_kcal": 359
+},
+{
+"date": "2026-03-25",
+"steps": 14118,
+"steps_goal": 10000,
+"floors": 14,
+"rhr": 56,
+"intensity_min": 32,
+"active_kcal": 706
+},
+{
+"date": "2026-03-26",
+"steps": 11142,
+"steps_goal": 10000,
+"floors": 8,
+"rhr": 58,
+"intensity_min": 7,
+"active_kcal": 706
+},
+{
+"date": "2026-03-27",
+"steps": 11265,
+"steps_goal": 10000,
+"floors": 18,
+"rhr": 57,
+"intensity_min": 2,
+"active_kcal": 865
+},
+{
+"date": "2026-03-28",
+"steps": 14761,
+"steps_goal": 10000,
+"floors": 20,
+"rhr": 55,
+"intensity_min": 22,
+"active_kcal": 642
+},
+{
+"date": "2026-03-29",
+"steps": 15048,
+"steps_goal": 10000,
+"floors": 15,
+"rhr": 56,
+"intensity_min": 24,
+"active_kcal": 833
+},
+{
+"date": "2026-03-30",
+"steps": 13641,
+"steps_goal": 10000,
+"floors": 14,
+"rhr": 58,
+"intensity_min": 24,
+"active_kcal": 525
+},
+{
+"date": "2026-03-31",
+"steps": 8848,
+"steps_goal": 10000,
+"floors": 10,
+"rhr": 58,
+"intensity_min": 0,
+"active_kcal": 843
+},
+{
+"date": "2026-04-01",
+"steps": 9419,
+"steps_goal": 10000,
+"floors": 21,
+"rhr": 57,
+"intensity_min": 35,
+"active_kcal": 334
+},
+{
+"date": "2026-04-02",
+"steps": 11734,
+"steps_goal": 10000,
+"floors": 13,
+"rhr": 57,
+"intensity_min": 54,
+"active_kcal": 254
+},
+{
+"date": "2026-04-03",
+"steps": 13848,
+"steps_goal": 10000,
+"floors": 18,
+"rhr": 58,
+"intensity_min": 32,
+"active_kcal": 333
+},
+{
+"date": "2026-04-04",
+"steps": 8621,
+"steps_goal": 10000,
+"floors": 12,
+"rhr": 56,
+"intensity_min": 47,
+"active_kcal": 460
+},
+{
+"date": "2026-04-05",
+"steps": 8340,
+"steps_goal": 10000,
+"floors": 12,
+"rhr": 57,
+"intensity_min": 40,
+"active_kcal": 660
+},
+{
+"date": "2026-04-06",
+"steps": 6330,
+"steps_goal": 10000,
+"floors": 13,
+"rhr": 55,
+"intensity_min": 69,
+"active_kcal": 384
+},
+{
+"date": "2026-04-07",
+"steps": 10286,
+"steps_goal": 10000,
+"floors": 4,
+"rhr": 55,
+"intensity_min": 4,
+"active_kcal": 470
+},
+{
+"date": "2026-04-08",
+"steps": 15434,
+"steps_goal": 10000,
+"floors": 9,
+"rhr": 58,
+"intensity_min": 15,
+"active_kcal": 440
+},
+{
+"date": "2026-04-09",
+"steps": 8955,
+"steps_goal": 10000,
+"floors": 12,
+"rhr": 58,
+"intensity_min": 28,
+"active_kcal": 414
+},
+{
+"date": "2026-04-10",
+"steps": 12838,
+"steps_goal": 10000,
+"floors": 18,
+"rhr": 55,
+"intensity_min": 53,
+"active_kcal": 730
+},
+{
+"date": "2026-04-11",
+"steps": 11505,
+"steps_goal": 10000,
+"floors": 10,
+"rhr": 58,
+"intensity_min": 20,
+"active_kcal": 783
+},
+{
+"date": "2026-04-12",
+"steps": 12623,
+"steps_goal": 10000,
+"floors": 19,
+"rhr": 58,
+"intensity_min": 47,
+"active_kcal": 351
+},
+{
+"date": "2026-04-13",
+"steps": 8766,
+"steps_goal": 10000,
+"floors": 7,
+"rhr": 59,
+"intensity_min": 17,
+"active_kcal": 760
+},
+{
+"date": "2026-04-14",
+"steps": 10977,
+"steps_goal": 10000,
+"floors": 10,
+"rhr": 56,
+"intensity_min": 36,
+"active_kcal": 716
+},
+{
+"date": "2026-04-15",
+"steps": 15234,
+"steps_goal": 10000,
+"floors": 10,
+"rhr": 57,
+"intensity_min": 22,
+"active_kcal": 618
+},
+{
+"date": "2026-04-16",
+"steps": 7056,
+"steps_goal": 10000,
+"floors": 17,
+"rhr": 55,
+"intensity_min": 70,
+"active_kcal": 322
+},
+{
+"date": "2026-04-17",
+"steps": 11766,
+"steps_goal": 10000,
+"floors": 7,
+"rhr": 59,
+"intensity_min": 0,
+"active_kcal": 522
+},
+{
+"date": "2026-04-18",
+"steps": 10255,
+"steps_goal": 10000,
+"floors": 17,
+"rhr": 56,
+"intensity_min": 68,
+"active_kcal": 435
+},
+{
+"date": "2026-04-19",
+"steps": 11683,
+"steps_goal": 10000,
+"floors": 22,
+"rhr": 58,
+"intensity_min": 65,
+"active_kcal": 581
+},
+{
+"date": "2026-04-20",
+"steps": 8106,
+"steps_goal": 10000,
+"floors": 17,
+"rhr": 55,
+"intensity_min": 34,
+"active_kcal": 776
+},
+{
+"date": "2026-04-21",
+"steps": 10253,
+"steps_goal": 10000,
+"floors": 16,
+"rhr": 55,
+"intensity_min": 46,
+"active_kcal": 814
+},
+{
+"date": "2026-04-22",
+"steps": 11671,
+"steps_goal": 10000,
+"floors": 7,
+"rhr": 57,
+"intensity_min": 15,
+"active_kcal": 413
+},
+{
+"date": "2026-04-23",
+"steps": 11388,
+"steps_goal": 10000,
+"floors": 5,
+"rhr": 55,
+"intensity_min": 17,
+"active_kcal": 492
+},
+{
+"date": "2026-04-24",
+"steps": 5519,
+"steps_goal": 10000,
+"floors": 22,
+"rhr": 56,
+"intensity_min": 42,
+"active_kcal": 737
+},
+{
+"date": "2026-04-25",
+"steps": 10252,
+"steps_goal": 10000,
+"floors": 5,
+"rhr": 57,
+"intensity_min": 23,
+"active_kcal": 452
+},
+{
+"date": "2026-04-26",
+"steps": 8203,
+"steps_goal": 10000,
+"floors": 13,
+"rhr": 55,
+"intensity_min": 57,
+"active_kcal": 500
+},
+{
+"date": "2026-04-27",
+"steps": 9892,
+"steps_goal": 10000,
+"floors": 22,
+"rhr": 55,
+"intensity_min": 15,
+"active_kcal": 410
+},
+{
+"date": "2026-04-28",
+"steps": 11332,
+"steps_goal": 10000,
+"floors": 10,
+"rhr": 56,
+"intensity_min": 21,
+"active_kcal": 484
+},
+{
+"date": "2026-04-29",
+"steps": 10273,
+"steps_goal": 10000,
+"floors": 11,
+"rhr": 57,
+"intensity_min": 12,
+"active_kcal": 453
+},
+{
+"date": "2026-04-30",
+"steps": 14226,
+"steps_goal": 10000,
+"floors": 14,
+"rhr": 55,
+"intensity_min": 51,
+"active_kcal": 676
+},
+{
+"date": "2026-05-01",
+"steps": 8279,
+"steps_goal": 10000,
+"floors": 7,
+"rhr": 56,
+"intensity_min": 62,
+"active_kcal": 509
+},
+{
+"date": "2026-05-02",
+"steps": 11746,
+"steps_goal": 10000,
+"floors": 19,
+"rhr": 55,
+"intensity_min": 8,
+"active_kcal": 745
+},
+{
+"date": "2026-05-03",
+"steps": 10010,
+"steps_goal": 10000,
+"floors": 6,
+"rhr": 55,
+"intensity_min": 41,
+"active_kcal": 495
+},
+{
+"date": "2026-05-04",
+"steps": 8059,
+"steps_goal": 10000,
+"floors": 12,
+"rhr": 55,
+"intensity_min": 56,
+"active_kcal": 698
+},
+{
+"date": "2026-05-05",
+"steps": 16045,
+"steps_goal": 10000,
+"floors": 12,
+"rhr": 57,
+"intensity_min": 14,
+"active_kcal": 639
+},
+{
+"date": "2026-05-06",
+"steps": 4226,
+"steps_goal": 10000,
+"floors": 14,
+"rhr": 58,
+"intensity_min": 56,
+"active_kcal": 829
+},
+{
+"date": "2026-05-07",
+"steps": 12135,
+"steps_goal": 10000,
+"floors": 21,
+"rhr": 57,
+"intensity_min": 28,
+"active_kcal": 884
+},
+{
+"date": "2026-05-08",
+"steps": 8971,
+"steps_goal": 10000,
+"floors": 21,
+"rhr": 55,
+"intensity_min": 15,
+"active_kcal": 893
+},
+{
+"date": "2026-05-09",
+"steps": 8998,
+"steps_goal": 10000,
+"floors": 16,
+"rhr": 56,
+"intensity_min": 37,
+"active_kcal": 661
+},
+{
+"date": "2026-05-10",
+"steps": 6578,
+"steps_goal": 10000,
+"floors": 15,
+"rhr": 57,
+"intensity_min": 58,
+"active_kcal": 618
+},
+{
+"date": "2026-05-11",
+"steps": 12151,
+"steps_goal": 10000,
+"floors": 12,
+"rhr": 57,
+"intensity_min": 2,
+"active_kcal": 529
+},
+{
+"date": "2026-05-12",
+"steps": 9799,
+"steps_goal": 10000,
+"floors": 13,
+"rhr": 57,
+"intensity_min": 29,
+"active_kcal": 598
+},
+{
+"date": "2026-05-13",
+"steps": 10593,
+"steps_goal": 10000,
+"floors": 12,
+"rhr": 58,
+"intensity_min": 5,
+"active_kcal": 384
+},
+{
+"date": "2026-05-14",
+"steps": 11472,
+"steps_goal": 10000,
+"floors": 9,
+"rhr": 57,
+"intensity_min": 45,
+"active_kcal": 537
+},
+{
+"date": "2026-05-15",
+"steps": 11166,
+"steps_goal": 10000,
+"floors": 17,
+"rhr": 55,
+"intensity_min": 47,
+"active_kcal": 771
+},
+{
+"date": "2026-05-16",
+"steps": 9841,
+"steps_goal": 10000,
+"floors": 16,
+"rhr": 56,
+"intensity_min": 48,
+"active_kcal": 261
+},
+{
+"date": "2026-05-17",
+"steps": 11302,
+"steps_goal": 10000,
+"floors": 10,
+"rhr": 54,
+"intensity_min": 29,
+"active_kcal": 550
+},
+{
+"date": "2026-05-18",
+"steps": 11202,
+"steps_goal": 10000,
+"floors": 14,
+"rhr": 55,
+"intensity_min": 41,
+"active_kcal": 778
+},
+{
+"date": "2026-05-19",
+"steps": 12584,
+"steps_goal": 10000,
+"floors": 17,
+"rhr": 58,
+"intensity_min": 1,
+"active_kcal": 483
+},
+{
+"date": "2026-05-20",
+"steps": 12069,
+"steps_goal": 10000,
+"floors": 5,
+"rhr": 56,
+"intensity_min": 70,
+"active_kcal": 561
+},
+{
+"date": "2026-05-21",
+"steps": 7923,
+"steps_goal": 10000,
+"floors": 9,
+"rhr": 57,
+"intensity_min": 60,
+"active_kcal": 811
+},
+{
+"date": "2026-05-22",
+"steps": 13891,
+"steps_goal": 10000,
+"floors": 12,
+"rhr": 57,
+"intensity_min": 56,
+"active_kcal": 343
+},
+{
+"date": "2026-05-23",
+"steps": 11770,
+"steps_goal": 10000,
+"floors": 4,
+"rhr": 56,
+"intensity_min": 64,
+"active_kcal": 716
+},
+{
+"date": "2026-05-24",
+"steps": 12974,
+"steps_goal": 10000,
+"floors": 7,
+"rhr": 56,
+"intensity_min": 69,
+"active_kcal": 464
+},
+{
+"date": "2026-05-25",
+"steps": 8462,
+"steps_goal": 10000,
+"floors": 6,
+"rhr": 56,
+"intensity_min": 47,
+"active_kcal": 367
+},
+{
+"date": "2026-05-26",
+"steps": 9812,
+"steps_goal": 10000,
+"floors": 9,
+"rhr": 56,
+"intensity_min": 46,
+"active_kcal": 477
+},
+{
+"date": "2026-05-27",
+"steps": 7896,
+"steps_goal": 10000,
+"floors": 11,
+"rhr": 55,
+"intensity_min": 58,
+"active_kcal": 418
+},
+{
+"date": "2026-05-28",
+"steps": 11650,
+"steps_goal": 10000,
+"floors": 16,
+"rhr": 57,
+"intensity_min": 63,
+"active_kcal": 808
+},
+{
+"date": "2026-05-29",
+"steps": 9704,
+"steps_goal": 10000,
+"floors": 20,
+"rhr": 55,
+"intensity_min": 21,
+"active_kcal": 771
+},
+{
+"date": "2026-05-30",
+"steps": 10263,
+"steps_goal": 10000,
+"floors": 12,
+"rhr": 55,
+"intensity_min": 25,
+"active_kcal": 809
+},
+{
+"date": "2026-05-31",
+"steps": 9144,
+"steps_goal": 10000,
+"floors": 22,
+"rhr": 57,
+"intensity_min": 56,
+"active_kcal": 577
+},
+{
+"date": "2026-06-01",
+"steps": 9488,
+"steps_goal": 10000,
+"floors": 7,
+"rhr": 54,
+"intensity_min": 4,
+"active_kcal": 856
+},
+{
+"date": "2026-06-02",
+"steps": 9061,
+"steps_goal": 10000,
+"floors": 20,
+"rhr": 54,
+"intensity_min": 29,
+"active_kcal": 700
+},
+{
+"date": "2026-06-03",
+"steps": 12457,
+"steps_goal": 10000,
+"floors": 14,
+"rhr": 56,
+"intensity_min": 16,
+"active_kcal": 594
+},
+{
+"date": "2026-06-04",
+"steps": 11663,
+"steps_goal": 10000,
+"floors": 12,
+"rhr": 55,
+"intensity_min": 11,
+"active_kcal": 459
+},
+{
+"date": "2026-06-05",
+"steps": 6088,
+"steps_goal": 10000,
+"floors": 12,
+"rhr": 56,
+"intensity_min": 0,
+"active_kcal": 310
+},
+{
+"date": "2026-06-06",
+"steps": 6894,
+"steps_goal": 10000,
+"floors": 8,
+"rhr": 55,
+"intensity_min": 69,
+"active_kcal": 725
+},
+{
+"date": "2026-06-07",
+"steps": 9562,
+"steps_goal": 10000,
+"floors": 20,
+"rhr": 55,
+"intensity_min": 39,
+"active_kcal": 655
+},
+{
+"date": "2026-06-08",
+"steps": 7338,
+"steps_goal": 10000,
+"floors": 4,
+"rhr": 56,
+"intensity_min": 45,
+"active_kcal": 660
+},
+{
+"date": "2026-06-09",
+"steps": 7765,
+"steps_goal": 10000,
+"floors": 8,
+"rhr": 56,
+"intensity_min": 23,
+"active_kcal": 733
+},
+{
+"date": "2026-06-10",
+"steps": 12164,
+"steps_goal": 10000,
+"floors": 10,
+"rhr": 57,
+"intensity_min": 25,
+"active_kcal": 504
+},
+{
+"date": "2026-06-11",
+"steps": 8154,
+"steps_goal": 10000,
+"floors": 16,
+"rhr": 56,
+"intensity_min": 27,
+"active_kcal": 573
+},
+{
+"date": "2026-06-12",
+"steps": 7519,
+"steps_goal": 10000,
+"floors": 22,
+"rhr": 56,
+"intensity_min": 16,
+"active_kcal": 424
+},
+{
+"date": "2026-06-13",
+"steps": 7844,
+"steps_goal": 10000,
+"floors": 17,
+"rhr": 55,
+"intensity_min": 12,
+"active_kcal": 409
+},
+{
+"date": "2026-06-14",
+"steps": 8484,
+"steps_goal": 10000,
+"floors": 8,
+"rhr": 54,
+"intensity_min": 24,
+"active_kcal": 415
+},
+{
+"date": "2026-06-15",
+"steps": 9991,
+"steps_goal": 10000,
+"floors": 10,
+"rhr": 56,
+"intensity_min": 13,
+"active_kcal": 800
+},
+{
+"date": "2026-06-16",
+"steps": 6954,
+"steps_goal": 10000,
+"floors": 9,
+"rhr": 56,
+"intensity_min": 47,
+"active_kcal": 356
+},
+{
+"date": "2026-06-17",
+"steps": 13101,
+"steps_goal": 10000,
+"floors": 7,
+"rhr": 54,
+"intensity_min": 6,
+"active_kcal": 452
+},
+{
+"date": "2026-06-18",
+"steps": 10531,
+"steps_goal": 10000,
+"floors": 13,
+"rhr": 57,
+"intensity_min": 28,
+"active_kcal": 630
+},
+{
+"date": "2026-06-19",
+"steps": 10520,
+"steps_goal": 10000,
+"floors": 7,
+"rhr": 55,
+"intensity_min": 62,
+"active_kcal": 273
+},
+{
+"date": "2026-06-20",
+"steps": 10581,
+"steps_goal": 10000,
+"floors": 16,
+"rhr": 55,
+"intensity_min": 68,
+"active_kcal": 651
+},
+{
+"date": "2026-06-21",
+"steps": 7803,
+"steps_goal": 10000,
+"floors": 20,
+"rhr": 57,
+"intensity_min": 60,
+"active_kcal": 531
+},
+{
+"date": "2026-06-22",
+"steps": 8631,
+"steps_goal": 10000,
+"floors": 18,
+"rhr": 57,
+"intensity_min": 31,
+"active_kcal": 820
+},
+{
+"date": "2026-06-23",
+"steps": 14038,
+"steps_goal": 10000,
+"floors": 9,
+"rhr": 57,
+"intensity_min": 60,
+"active_kcal": 384
+},
+{
+"date": "2026-06-24",
+"steps": 8024,
+"steps_goal": 10000,
+"floors": 13,
+"rhr": 54,
+"intensity_min": 56,
+"active_kcal": 582
+},
+{
+"date": "2026-06-25",
+"steps": 11078,
+"steps_goal": 10000,
+"floors": 13,
+"rhr": 55,
+"intensity_min": 69,
+"active_kcal": 416
+},
+{
+"date": "2026-06-26",
+"steps": 11459,
+"steps_goal": 10000,
+"floors": 9,
+"rhr": 56,
+"intensity_min": 64,
+"active_kcal": 674
+},
+{
+"date": "2026-06-27",
+"steps": 8337,
+"steps_goal": 10000,
+"floors": 11,
+"rhr": 55,
+"intensity_min": 25,
+"active_kcal": 579
+},
+{
+"date": "2026-06-28",
+"steps": 5775,
+"steps_goal": 10000,
+"floors": 22,
+"rhr": 54,
+"intensity_min": 57,
+"active_kcal": 518
+},
+{
+"date": "2026-06-29",
+"steps": 8122,
+"steps_goal": 10000,
+"floors": 9,
+"rhr": 55,
+"intensity_min": 34,
+"active_kcal": 493
+},
+{
+"date": "2026-06-30",
+"steps": 8024,
+"steps_goal": 10000,
+"floors": 22,
+"rhr": 55,
+"intensity_min": 8,
+"active_kcal": 354
+},
+{
+"date": "2026-07-01",
+"steps": 12904,
+"steps_goal": 10000,
+"floors": 8,
+"rhr": 57,
+"intensity_min": 11,
+"active_kcal": 266
+},
+{
+"date": "2026-07-02",
+"steps": 11473,
+"steps_goal": 10000,
+"floors": 8,
+"rhr": 55,
+"intensity_min": 53,
+"active_kcal": 701
+},
+{
+"date": "2026-07-03",
+"steps": 10342,
+"steps_goal": 10000,
+"floors": 17,
+"rhr": 55,
+"intensity_min": 7,
+"active_kcal": 364
+},
+{
+"date": "2026-07-04",
+"steps": 10020,
+"steps_goal": 10000,
+"floors": 19,
+"rhr": 55,
+"intensity_min": 55,
+"active_kcal": 271
+},
+{
+"date": "2026-07-05",
+"steps": 9712,
+"steps_goal": 10000,
+"floors": 20,
+"rhr": 55,
+"intensity_min": 29,
+"active_kcal": 627
+},
+{
+"date": "2026-07-06",
+"steps": 8518,
+"steps_goal": 10000,
+"floors": 20,
+"rhr": 55,
+"intensity_min": 30,
+"active_kcal": 694
+},
+{
+"date": "2026-07-07",
+"steps": 12308,
+"steps_goal": 10000,
+"floors": 12,
+"rhr": 57,
+"intensity_min": 26,
+"active_kcal": 388
+},
+{
+"date": "2026-07-08",
+"steps": 7560,
+"steps_goal": 10000,
+"floors": 21,
+"rhr": 53,
+"intensity_min": 32,
+"active_kcal": 429
+},
+{
+"date": "2026-07-09",
+"steps": 12133,
+"steps_goal": 10000,
+"floors": 13,
+"rhr": 56,
+"intensity_min": 13,
+"active_kcal": 438
+},
+{
+"date": "2026-07-10",
+"steps": 12787,
+"steps_goal": 10000,
+"floors": 16,
+"rhr": 56,
+"intensity_min": 25,
+"active_kcal": 633
+},
+{
+"date": "2026-07-11",
+"steps": 8969,
+"steps_goal": 10000,
+"floors": 16,
+"rhr": 54,
+"intensity_min": 18,
+"active_kcal": 774
+},
+{
+"date": "2026-07-12",
+"steps": 9977,
+"steps_goal": 10000,
+"floors": 21,
+"rhr": 57,
+"intensity_min": 46,
+"active_kcal": 524
+},
+{
+"date": "2026-07-13",
+"steps": 15837,
+"steps_goal": 10000,
+"floors": 9,
+"rhr": 57,
+"intensity_min": 22,
+"active_kcal": 424
+},
+{
+"date": "2026-07-14",
+"steps": 12494,
+"steps_goal": 10000,
+"floors": 8,
+"rhr": 56,
+"intensity_min": 28,
+"active_kcal": 586
+},
+{
+"date": "2026-07-15",
+"steps": 8019,
+"steps_goal": 10000,
+"floors": 13,
+"rhr": 55,
+"intensity_min": 34,
+"active_kcal": 460
+},
+{
+"date": "2026-07-16",
+"steps": 10810,
+"steps_goal": 10000,
+"floors": 16,
+"rhr": 56,
+"intensity_min": 12,
+"active_kcal": 483
+},
+{
+"date": "2026-07-17",
+"steps": 12267,
+"steps_goal": 10000,
+"floors": 6,
+"rhr": 54,
+"intensity_min": 36,
+"active_kcal": 468
+},
+{
+"date": "2026-07-18",
+"steps": 4950,
+"steps_goal": 10000,
+"floors": 7,
+"rhr": 56,
+"intensity_min": 2,
+"active_kcal": 893
+},
+{
+"date": "2026-07-19",
+"steps": 10979,
+"steps_goal": 10000,
+"floors": 21,
+"rhr": 55,
+"intensity_min": 44,
+"active_kcal": 658
+},
+{
+"date": "2026-07-20",
+"steps": 8975,
+"steps_goal": 10000,
+"floors": 10,
+"rhr": 57,
+"intensity_min": 41,
+"active_kcal": 298
+},
+{
+"date": "2026-07-21",
+"steps": 8771,
+"steps_goal": 10000,
+"floors": 12,
+"rhr": 56,
+"intensity_min": 55,
+"active_kcal": 786
+},
+{
+"date": "2026-07-22",
+"steps": 13188,
+"steps_goal": 10000,
+"floors": 7,
+"rhr": 54,
+"intensity_min": 16,
+"active_kcal": 464
+},
+{
+"date": "2026-07-23",
+"steps": 6051,
+"steps_goal": 10000,
+"floors": 9,
+"rhr": 56,
+"intensity_min": 7,
+"active_kcal": 428
+},
+{
+"date": "2026-07-24",
+"steps": 4901,
+"steps_goal": 10000,
+"floors": 17,
+"rhr": 54,
+"intensity_min": 17,
+"active_kcal": 301
+},
+{
+"date": "2026-07-25",
+"steps": 7439,
+"steps_goal": 10000,
+"floors": 20,
+"rhr": 53,
+"intensity_min": 4,
+"active_kcal": 871
+},
+{
+"date": "2026-07-26",
+"steps": 11130,
+"steps_goal": 10000,
+"floors": 17,
+"rhr": 57,
+"intensity_min": 62,
+"active_kcal": 754
+},
+{
+"date": "2026-07-27",
+"steps": 10888,
+"steps_goal": 10000,
+"floors": 7,
+"rhr": 56,
+"intensity_min": 40,
+"active_kcal": 262
+},
+{
+"date": "2026-07-28",
+"steps": 8550,
+"steps_goal": 10000,
+"floors": 6,
+"rhr": 55,
+"intensity_min": 67,
+"active_kcal": 634
+},
+{
+"date": "2026-07-29",
+"steps": 7593,
+"steps_goal": 10000,
+"floors": 4,
+"rhr": 54,
+"intensity_min": 60,
+"active_kcal": 561
+},
+{
+"date": "2026-07-30",
+"steps": 14662,
+"steps_goal": 10000,
+"floors": 11,
+"rhr": 55,
+"intensity_min": 59,
+"active_kcal": 637
+},
+{
+"date": "2026-07-31",
+"steps": 9734,
+"steps_goal": 10000,
+"floors": 22,
+"rhr": 55,
+"intensity_min": 3,
+"active_kcal": 690
+},
+{
+"date": "2026-08-01",
+"steps": 10173,
+"steps_goal": 10000,
+"floors": 21,
+"rhr": 53,
+"intensity_min": 37,
+"active_kcal": 264
+},
+{
+"date": "2026-08-02",
+"steps": 11719,
+"steps_goal": 10000,
+"floors": 12,
+"rhr": 54,
+"intensity_min": 48,
+"active_kcal": 481
+},
+{
+"date": "2026-08-03",
+"steps": 4873,
+"steps_goal": 10000,
+"floors": 7,
+"rhr": 54,
+"intensity_min": 66,
+"active_kcal": 644
+},
+{
+"date": "2026-08-04",
+"steps": 7050,
+"steps_goal": 10000,
+"floors": 8,
+"rhr": 56,
+"intensity_min": 22,
+"active_kcal": 821
+},
+{
+"date": "2026-08-05",
+"steps": 9794,
+"steps_goal": 10000,
+"floors": 20,
+"rhr": 54,
+"intensity_min": 63,
+"active_kcal": 303
+},
+{
+"date": "2026-08-06",
+"steps": 4703,
+"steps_goal": 10000,
+"floors": 6,
+"rhr": 54,
+"intensity_min": 9,
+"active_kcal": 409
+},
+{
+"date": "2026-08-07",
+"steps": 14072,
+"steps_goal": 10000,
+"floors": 18,
+"rhr": 55,
+"intensity_min": 18,
+"active_kcal": 748
+},
+{
+"date": "2026-08-08",
+"steps": 8426,
+"steps_goal": 10000,
+"floors": 5,
+"rhr": 56,
+"intensity_min": 33,
+"active_kcal": 349
+},
+{
+"date": "2026-08-09",
+"steps": 12940,
+"steps_goal": 10000,
+"floors": 8,
+"rhr": 57,
+"intensity_min": 40,
+"active_kcal": 652
+},
+{
+"date": "2026-08-10",
+"steps": 10366,
+"steps_goal": 10000,
+"floors": 8,
+"rhr": 55,
+"intensity_min": 47,
+"active_kcal": 405
+},
+{
+"date": "2026-08-11",
+"steps": 11187,
+"steps_goal": 10000,
+"floors": 13,
+"rhr": 54,
+"intensity_min": 36,
+"active_kcal": 727
+},
+{
+"date": "2026-08-12",
+"steps": 9063,
+"steps_goal": 10000,
+"floors": 10,
+"rhr": 53,
+"intensity_min": 0,
+"active_kcal": 343
+},
+{
+"date": "2026-08-13",
+"steps": 16293,
+"steps_goal": 10000,
+"floors": 18,
+"rhr": 53,
+"intensity_min": 50,
+"active_kcal": 598
+},
+{
+"date": "2026-08-14",
+"steps": 8037,
+"steps_goal": 10000,
+"floors": 8,
+"rhr": 56,
+"intensity_min": 8,
+"active_kcal": 549
+},
+{
+"date": "2026-08-15",
+"steps": 8825,
+"steps_goal": 10000,
+"floors": 19,
+"rhr": 54,
+"intensity_min": 11,
+"active_kcal": 371
+},
+{
+"date": "2026-08-16",
+"steps": 10334,
+"steps_goal": 10000,
+"floors": 20,
+"rhr": 56,
+"intensity_min": 20,
+"active_kcal": 773
+},
+{
+"date": "2026-08-17",
+"steps": 13323,
+"steps_goal": 10000,
+"floors": 16,
+"rhr": 55,
+"intensity_min": 10,
+"active_kcal": 651
+},
+{
+"date": "2026-08-18",
+"steps": 7644,
+"steps_goal": 10000,
+"floors": 22,
+"rhr": 55,
+"intensity_min": 17,
+"active_kcal": 427
+},
+{
+"date": "2026-08-19",
+"steps": 10984,
+"steps_goal": 10000,
+"floors": 21,
+"rhr": 56,
+"intensity_min": 47,
+"active_kcal": 468
+},
+{
+"date": "2026-08-20",
+"steps": 9134,
+"steps_goal": 10000,
+"floors": 6,
+"rhr": 53,
+"intensity_min": 28,
+"active_kcal": 567
+},
+{
+"date": "2026-08-21",
+"steps": 8739,
+"steps_goal": 10000,
+"floors": 7,
+"rhr": 54,
+"intensity_min": 39,
+"active_kcal": 781
+},
+{
+"date": "2026-08-22",
+"steps": 8795,
+"steps_goal": 10000,
+"floors": 9,
+"rhr": 54,
+"intensity_min": 64,
+"active_kcal": 805
+},
+{
+"date": "2026-08-23",
+"steps": 12578,
+"steps_goal": 10000,
+"floors": 14,
+"rhr": 54,
+"intensity_min": 40,
+"active_kcal": 755
+},
+{
+"date": "2026-08-24",
+"steps": 6354,
+"steps_goal": 10000,
+"floors": 5,
+"rhr": 54,
+"intensity_min": 10,
+"active_kcal": 470
+},
+{
+"date": "2026-08-25",
+"steps": 10242,
+"steps_goal": 10000,
+"floors": 6,
+"rhr": 53,
+"intensity_min": 26,
+"active_kcal": 344
+},
+{
+"date": "2026-08-26",
+"steps": 11747,
+"steps_goal": 10000,
+"floors": 17,
+"rhr": 54,
+"intensity_min": 5,
+"active_kcal": 330
+},
+{
+"date": "2026-08-27",
+"steps": 13177,
+"steps_goal": 10000,
+"floors": 11,
+"rhr": 54,
+"intensity_min": 59,
+"active_kcal": 435
+},
+{
+"date": "2026-08-28",
+"steps": 7121,
+"steps_goal": 10000,
+"floors": 16,
+"rhr": 56,
+"intensity_min": 8,
+"active_kcal": 445
+},
+{
+"date": "2026-08-29",
+"steps": 7317,
+"steps_goal": 10000,
+"floors": 16,
+"rhr": 54,
+"intensity_min": 40,
+"active_kcal": 263
+},
+{
+"date": "2026-08-30",
+"steps": 12605,
+"steps_goal": 10000,
+"floors": 22,
+"rhr": 56,
+"intensity_min": 38,
+"active_kcal": 463
+},
+{
+"date": "2026-08-31",
+"steps": 3456,
+"steps_goal": 10000,
+"floors": 16,
+"rhr": 53,
+"intensity_min": 1,
+"active_kcal": 839
+},
+{
+"date": "2026-09-01",
+"steps": 8155,
+"steps_goal": 10000,
+"floors": 10,
+"rhr": 54,
+"intensity_min": 70,
+"active_kcal": 862
+},
+{
+"date": "2026-09-02",
+"steps": 10415,
+"steps_goal": 10000,
+"floors": 12,
+"rhr": 54,
+"intensity_min": 17,
+"active_kcal": 703
+},
+{
+"date": "2026-09-03",
+"steps": 10485,
+"steps_goal": 10000,
+"floors": 10,
+"rhr": 57,
+"intensity_min": 50,
+"active_kcal": 601
+},
+{
+"date": "2026-09-04",
+"steps": 12541,
+"steps_goal": 10000,
+"floors": 13,
+"rhr": 53,
+"intensity_min": 18,
+"active_kcal": 348
+},
+{
+"date": "2026-09-05",
+"steps": 11930,
+"steps_goal": 10000,
+"floors": 21,
+"rhr": 54,
+"intensity_min": 1,
+"active_kcal": 477
+},
+{
+"date": "2026-09-06",
+"steps": 10058,
+"steps_goal": 10000,
+"floors": 13,
+"rhr": 54,
+"intensity_min": 65,
+"active_kcal": 528
+},
+{
+"date": "2026-09-07",
+"steps": 10259,
+"steps_goal": 10000,
+"floors": 6,
+"rhr": 55,
+"intensity_min": 57,
+"active_kcal": 760
+},
+{
+"date": "2026-09-08",
+"steps": 15239,
+"steps_goal": 10000,
+"floors": 12,
+"rhr": 55,
+"intensity_min": 60,
+"active_kcal": 760
+},
+{
+"date": "2026-09-09",
+"steps": 13841,
+"steps_goal": 10000,
+"floors": 11,
+"rhr": 53,
+"intensity_min": 67,
+"active_kcal": 493
+},
+{
+"date": "2026-09-10",
+"steps": 8935,
+"steps_goal": 10000,
+"floors": 11,
+"rhr": 54,
+"intensity_min": 60,
+"active_kcal": 442
+},
+{
+"date": "2026-09-11",
+"steps": 10685,
+"steps_goal": 10000,
+"floors": 9,
+"rhr": 56,
+"intensity_min": 12,
+"active_kcal": 779
+},
+{
+"date": "2026-09-12",
+"steps": 7482,
+"steps_goal": 10000,
+"floors": 19,
+"rhr": 54,
+"intensity_min": 50,
+"active_kcal": 462
+},
+{
+"date": "2026-09-13",
+"steps": 6634,
+"steps_goal": 10000,
+"floors": 19,
+"rhr": 53,
+"intensity_min": 69,
+"active_kcal": 764
+},
+{
+"date": "2026-09-14",
+"steps": 16027,
+"steps_goal": 10000,
+"floors": 7,
+"rhr": 55,
+"intensity_min": 58,
+"active_kcal": 479
+},
+{
+"date": "2026-09-15",
+"steps": 6324,
+"steps_goal": 10000,
+"floors": 14,
+"rhr": 54,
+"intensity_min": 10,
+"active_kcal": 670
+},
+{
+"date": "2026-09-16",
+"steps": 7675,
+"steps_goal": 10000,
+"floors": 12,
+"rhr": 56,
+"intensity_min": 38,
+"active_kcal": 808
+},
+{
+"date": "2026-09-17",
+"steps": 13247,
+"steps_goal": 10000,
+"floors": 10,
+"rhr": 56,
+"intensity_min": 8,
+"active_kcal": 334
+},
+{
+"date": "2026-09-18",
+"steps": 9896,
+"steps_goal": 10000,
+"floors": 12,
+"rhr": 54,
+"intensity_min": 3,
+"active_kcal": 670
+},
+{
+"date": "2026-09-19",
+"steps": 10261,
+"steps_goal": 10000,
+"floors": 10,
+"rhr": 53,
+"intensity_min": 3,
+"active_kcal": 847
+},
+{
+"date": "2026-09-20",
+"steps": 10833,
+"steps_goal": 10000,
+"floors": 7,
+"rhr": 54,
+"intensity_min": 5,
+"active_kcal": 664
+},
+{
+"date": "2026-09-21",
+"steps": 10040,
+"steps_goal": 10000,
+"floors": 8,
+"rhr": 54,
+"intensity_min": 53,
+"active_kcal": 534
+},
+{
+"date": "2026-09-22",
+"steps": 8078,
+"steps_goal": 10000,
+"floors": 20,
+"rhr": 55,
+"intensity_min": 23,
+"active_kcal": 780
+},
+{
+"date": "2026-09-23",
+"steps": 12300,
+"steps_goal": 10000,
+"floors": 5,
+"rhr": 53,
+"intensity_min": 61,
+"active_kcal": 745
+},
+{
+"date": "2026-09-24",
+"steps": 12768,
+"steps_goal": 10000,
+"floors": 10,
+"rhr": 53,
+"intensity_min": 59,
+"active_kcal": 731
+},
+{
+"date": "2026-09-25",
+"steps": 11608,
+"steps_goal": 10000,
+"floors": 7,
+"rhr": 53,
+"intensity_min": 42,
+"active_kcal": 782
+},
+{
+"date": "2026-09-26",
+"steps": 11006,
+"steps_goal": 10000,
+"floors": 4,
+"rhr": 54,
+"intensity_min": 53,
+"active_kcal": 836
+},
+{
+"date": "2026-09-27",
+"steps": 13541,
+"steps_goal": 10000,
+"floors": 20,
+"rhr": 54,
+"intensity_min": 54,
+"active_kcal": 517
+},
+{
+"date": "2026-09-28",
+"steps": 7834,
+"steps_goal": 10000,
+"floors": 18,
+"rhr": 53,
+"intensity_min": 15,
+"active_kcal": 625
+},
+{
+"date": "2026-09-29",
+"steps": 13235,
+"steps_goal": 10000,
+"floors": 14,
+"rhr": 56,
+"intensity_min": 30,
+"active_kcal": 496
+},
+{
+"date": "2026-09-30",
+"steps": 11631,
+"steps_goal": 10000,
+"floors": 15,
+"rhr": 53,
+"intensity_min": 58,
+"active_kcal": 398
+},
+{
+"date": "2026-10-01",
+"steps": 8786,
+"steps_goal": 10000,
+"floors": 18,
+"rhr": 55,
+"intensity_min": 60,
+"active_kcal": 881
+},
+{
+"date": "2026-10-02",
+"steps": 6263,
+"steps_goal": 10000,
+"floors": 7,
+"rhr": 55,
+"intensity_min": 56,
+"active_kcal": 600
+},
+{
+"date": "2026-10-03",
+"steps": 12759,
+"steps_goal": 10000,
+"floors": 20,
+"rhr": 54,
+"intensity_min": 8,
+"active_kcal": 585
+},
+{
+"date": "2026-10-04",
+"steps": 8861,
+"steps_goal": 10000,
+"floors": 5,
+"rhr": 54,
+"intensity_min": 41,
+"active_kcal": 823
+},
+{
+"date": "2026-10-05",
+"steps": 12435,
+"steps_goal": 10000,
+"floors": 22,
+"rhr": 55,
+"intensity_min": 57,
+"active_kcal": 409
+},
+{
+"date": "2026-10-06",
+"steps": 7997,
+"steps_goal": 10000,
+"floors": 10,
+"rhr": 55,
+"intensity_min": 22,
+"active_kcal": 654
+},
+{
+"date": "2026-10-07",
+"steps": 11251,
+"steps_goal": 10000,
+"floors": 17,
+"rhr": 55,
+"intensity_min": 32,
+"active_kcal": 430
+},
+{
+"date": "2026-10-08",
+"steps": 4846,
+"steps_goal": 10000,
+"floors": 20,
+"rhr": 53,
+"intensity_min": 26,
+"active_kcal": 640
+},
+{
+"date": "2026-10-09",
+"steps": 11026,
+"steps_goal": 10000,
+"floors": 15,
+"rhr": 56,
+"intensity_min": 58,
+"active_kcal": 775
+},
+{
+"date": "2026-10-10",
+"steps": 10654,
+"steps_goal": 10000,
+"floors": 17,
+"rhr": 53,
+"intensity_min": 33,
+"active_kcal": 343
+},
+{
+"date": "2026-10-11",
+"steps": 10419,
+"steps_goal": 10000,
+"floors": 12,
+"rhr": 55,
+"intensity_min": 6,
+"active_kcal": 829
+},
+{
+"date": "2026-10-12",
+"steps": 10238,
+"steps_goal": 10000,
+"floors": 22,
+"rhr": 56,
+"intensity_min": 24,
+"active_kcal": 497
+},
+{
+"date": "2026-10-13",
+"steps": 11688,
+"steps_goal": 10000,
+"floors": 7,
+"rhr": 54,
+"intensity_min": 45,
+"active_kcal": 816
+},
+{
+"date": "2026-10-14",
+"steps": 9837,
+"steps_goal": 10000,
+"floors": 12,
+"rhr": 53,
+"intensity_min": 11,
+"active_kcal": 489
+},
+{
+"date": "2026-10-15",
+"steps": 8169,
+"steps_goal": 10000,
+"floors": 5,
+"rhr": 52,
+"intensity_min": 48,
+"active_kcal": 608
+},
+{
+"date": "2026-10-16",
+"steps": 6708,
+"steps_goal": 10000,
+"floors": 20,
+"rhr": 54,
+"intensity_min": 22,
+"active_kcal": 841
+},
+{
+"date": "2026-10-17",
+"steps": 10143,
+"steps_goal": 10000,
+"floors": 21,
+"rhr": 56,
+"intensity_min": 53,
+"active_kcal": 844
+},
+{
+"date": "2026-10-18",
+"steps": 11715,
+"steps_goal": 10000,
+"floors": 5,
+"rhr": 55,
+"intensity_min": 16,
+"active_kcal": 561
+},
+{
+"date": "2026-10-19",
+"steps": 6141,
+"steps_goal": 10000,
+"floors": 17,
+"rhr": 55,
+"intensity_min": 69,
+"active_kcal": 552
+},
+{
+"date": "2026-10-20",
+"steps": 12234,
+"steps_goal": 10000,
+"floors": 21,
+"rhr": 53,
+"intensity_min": 30,
+"active_kcal": 663
+},
+{
+"date": "2026-10-21",
+"steps": 11552,
+"steps_goal": 10000,
+"floors": 7,
+"rhr": 55,
+"intensity_min": 68,
+"active_kcal": 817
+},
+{
+"date": "2026-10-22",
+"steps": 13447,
+"steps_goal": 10000,
+"floors": 14,
+"rhr": 55,
+"intensity_min": 2,
+"active_kcal": 801
+},
+{
+"date": "2026-10-23",
+"steps": 9745,
+"steps_goal": 10000,
+"floors": 5,
+"rhr": 53,
+"intensity_min": 35,
+"active_kcal": 377
+},
+{
+"date": "2026-10-24",
+"steps": 9763,
+"steps_goal": 10000,
+"floors": 13,
+"rhr": 53,
+"intensity_min": 65,
+"active_kcal": 353
+},
+{
+"date": "2026-10-25",
+"steps": 13340,
+"steps_goal": 10000,
+"floors": 21,
+"rhr": 54,
+"intensity_min": 46,
+"active_kcal": 710
+},
+{
+"date": "2026-10-26",
+"steps": 11269,
+"steps_goal": 10000,
+"floors": 17,
+"rhr": 52,
+"intensity_min": 67,
+"active_kcal": 539
+},
+{
+"date": "2026-10-27",
+"steps": 13529,
+"steps_goal": 10000,
+"floors": 7,
+"rhr": 55,
+"intensity_min": 56,
+"active_kcal": 888
+},
+{
+"date": "2026-10-28",
+"steps": 10527,
+"steps_goal": 10000,
+"floors": 8,
+"rhr": 53,
+"intensity_min": 19,
+"active_kcal": 410
+},
+{
+"date": "2026-10-29",
+"steps": 9467,
+"steps_goal": 10000,
+"floors": 4,
+"rhr": 56,
+"intensity_min": 29,
+"active_kcal": 573
+},
+{
+"date": "2026-10-30",
+"steps": 10927,
+"steps_goal": 10000,
+"floors": 18,
+"rhr": 52,
+"intensity_min": 67,
+"active_kcal": 589
+},
+{
+"date": "2026-10-31",
+"steps": 15940,
+"steps_goal": 10000,
+"floors": 19,
+"rhr": 54,
+"intensity_min": 70,
+"active_kcal": 402
+},
+{
+"date": "2026-11-01",
+"steps": 9839,
+"steps_goal": 10000,
+"floors": 19,
+"rhr": 52,
+"intensity_min": 15,
+"active_kcal": 730
+},
+{
+"date": "2026-11-02",
+"steps": 9407,
+"steps_goal": 10000,
+"floors": 21,
+"rhr": 55,
+"intensity_min": 56,
+"active_kcal": 843
+},
+{
+"date": "2026-11-03",
+"steps": 10872,
+"steps_goal": 10000,
+"floors": 7,
+"rhr": 54,
+"intensity_min": 16,
+"active_kcal": 805
+},
+{
+"date": "2026-11-04",
+"steps": 10545,
+"steps_goal": 10000,
+"floors": 16,
+"rhr": 53,
+"intensity_min": 7,
+"active_kcal": 265
+},
+{
+"date": "2026-11-05",
+"steps": 8602,
+"steps_goal": 10000,
+"floors": 22,
+"rhr": 55,
+"intensity_min": 21,
+"active_kcal": 732
+},
+{
+"date": "2026-11-06",
+"steps": 12570,
+"steps_goal": 10000,
+"floors": 20,
+"rhr": 55,
+"intensity_min": 62,
+"active_kcal": 429
+},
+{
+"date": "2026-11-07",
+"steps": 8769,
+"steps_goal": 10000,
+"floors": 15,
+"rhr": 53,
+"intensity_min": 14,
+"active_kcal": 596
+},
+{
+"date": "2026-11-08",
+"steps": 10542,
+"steps_goal": 10000,
+"floors": 6,
+"rhr": 54,
+"intensity_min": 40,
+"active_kcal": 475
+},
+{
+"date": "2026-11-09",
+"steps": 10283,
+"steps_goal": 10000,
+"floors": 21,
+"rhr": 52,
+"intensity_min": 68,
+"active_kcal": 520
+},
+{
+"date": "2026-11-10",
+"steps": 9763,
+"steps_goal": 10000,
+"floors": 22,
+"rhr": 53,
+"intensity_min": 2,
+"active_kcal": 604
+},
+{
+"date": "2026-11-11",
+"steps": 8736,
+"steps_goal": 10000,
+"floors": 20,
+"rhr": 54,
+"intensity_min": 12,
+"active_kcal": 858
+},
+{
+"date": "2026-11-12",
+"steps": 11049,
+"steps_goal": 10000,
+"floors": 18,
+"rhr": 53,
+"intensity_min": 30,
+"active_kcal": 432
+},
+{
+"date": "2026-11-13",
+"steps": 14579,
+"steps_goal": 10000,
+"floors": 12,
+"rhr": 53,
+"intensity_min": 25,
+"active_kcal": 336
+},
+{
+"date": "2026-11-14",
+"steps": 13961,
+"steps_goal": 10000,
+"floors": 18,
+"rhr": 53,
+"intensity_min": 52,
+"active_kcal": 671
+},
+{
+"date": "2026-11-15",
+"steps": 11866,
+"steps_goal": 10000,
+"floors": 8,
+"rhr": 53,
+"intensity_min": 22,
+"active_kcal": 255
+},
+{
+"date": "2026-11-16",
+"steps": 7486,
+"steps_goal": 10000,
+"floors": 4,
+"rhr": 54,
+"intensity_min": 46,
+"active_kcal": 577
+},
+{
+"date": "2026-11-17",
+"steps": 10183,
+"steps_goal": 10000,
+"floors": 6,
+"rhr": 54,
+"intensity_min": 29,
+"active_kcal": 360
+},
+{
+"date": "2026-11-18",
+"steps": 13761,
+"steps_goal": 10000,
+"floors": 9,
+"rhr": 55,
+"intensity_min": 60,
+"active_kcal": 411
+},
+{
+"date": "2026-11-19",
+"steps": 8353,
+"steps_goal": 10000,
+"floors": 19,
+"rhr": 52,
+"intensity_min": 30,
+"active_kcal": 629
+},
+{
+"date": "2026-11-20",
+"steps": 10030,
+"steps_goal": 10000,
+"floors": 8,
+"rhr": 54,
+"intensity_min": 54,
+"active_kcal": 758
+}
+]

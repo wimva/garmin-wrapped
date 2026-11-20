@@ -1,0 +1,10 @@
+scene/node_modules/
+scene/preview/
+__pycache__/
+.DS_Store
+web/garmin-wrapped-kit.zip
+example/*/out/*.png
+example/*/out/*.mp4
+!example/*/out/contact_sheet.png
+out/
+data/
