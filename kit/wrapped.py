@@ -2,13 +2,15 @@
 """Garmin Wrapped '26 — step 3: render wrapped.json into carousel slides (PNG stills and/or MP4 videos).
 
     python wrapped.py DATA_DIR/wrapped.json --out OUT_DIR --stills            # 10 PNGs, 2160x2700 (4:5)
-    python wrapped.py DATA_DIR/wrapped.json --out OUT_DIR --video             # 10 MP4s, 1080x1350, 6 s seamless loops
+    python wrapped.py DATA_DIR/wrapped.json --out OUT_DIR --video --sheet     # 10 MP4s, 1080x1350, 6 s seamless loops
+    python wrapped.py --check                   # fonts, backgrounds and video support (run this first)
     python wrapped.py ... --slides 3 4          # only some slides (handy in sandboxes with short time limits)
     python wrapped.py ... --sheet               # also writes contact_sheet.png to check the whole strip at once
 
-Needs Pillow (+ numpy optional). Video needs ffmpeg: system ffmpeg, or `pip install imageio-ffmpeg`, or OpenCV.
-The three.js/GSAP background art is pre-rendered in assets/bg (stills + seamless loops); this script draws the
-data layer on top: count-ups, draw-on lines and staggered reveals, all in the Garmin Wrapped '26 style.
+Needs Pillow. Video needs ffmpeg (system ffmpeg, or `pip install imageio-ffmpeg`) or OpenCV + numpy.
+The three.js/GSAP background art is pre-rendered in assets/bg (stills + 6 s seamless loops). This script draws the
+static data layer on top. In a video only the background moves, so every MP4 loops seamlessly on its own,
+and one ffmpeg call per slide makes it fast (about a second per slide).
 """
 import argparse, datetime as dt, json, math, os, shutil, subprocess, sys
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
@@ -23,8 +25,6 @@ TYPE = TOK['type']
 MIN_PX = TYPE['minimum']                          # Garmin School rule: never smaller than this
 FONT_DIR = os.path.join(HERE, 'assets', 'fonts')
 BG_DIR = os.path.join(HERE, 'assets', 'bg')
-STATIC_AFTER = 3.0                                # all reveals are done after 3 s; frames until OUT_START reuse the overlay
-OUT_START, OUT_DUR = SECONDS - 0.85, 0.6          # then everything clears, so each MP4 loops seamlessly on its own
 
 
 # ============================================================================================ helpers
@@ -123,22 +123,10 @@ class Slide:
     def inkA(self, a):
         return self.ink[:3] + (int(255 * a),)
 
-    # every element is drawn through put(): it fades in and rises while t < t0 + dur
+    # every element is drawn through put(). The data layer is static (Wim, 2026-11-20): in the animated
+    # version only the three.js background moves, so put() draws immediately and ignores the timing args.
     def put(self, t, t0, fn, dur=0.55, rise=40):
-        e = ease(t, t0, dur) * (1 - ease(t, OUT_START, OUT_DUR))
-        if e <= 0:
-            return
-        if e >= 1:
-            fn(ImageDraw.Draw(self.img))
-            return
-        L = Image.new('RGBA', self.img.size, (0, 0, 0, 0))
-        fn(ImageDraw.Draw(L))
-        a = L.getchannel('A').point(lambda v: int(v * e))
-        L.putalpha(a)
-        dy = int(rise * (1 - e) * S)
-        if dy:
-            L = L.crop((0, 0, L.width, L.height - dy))
-        self.img.alpha_composite(L, dest=(0, dy))
+        fn(ImageDraw.Draw(self.img))
 
     def text(self, dr, xy, s, f, fill, anchor='la', tracking=0):
         x, y = xy
@@ -169,7 +157,7 @@ class Slide:
         f = font('body', TYPE['tag'], 600)
         label = 'BY THE GARMIN SCHOOL'
         w = sum(tw(c, f) for c in label) + 1.6 * (len(label) - 1)
-        x0, y0, h = MX, TOK['layout']['tag_top'], 58
+        x0, y0, h = MX, TOK['layout']['tag_top'] - 2, 64
         self.rrect(dr, (x0, y0, x0 + w + 56, y0 + h), h / 2, fill=self.ink)
         self.text(dr, (x0 + 28, y0 + h / 2 + 1), label, f, self.bg, 'lm', tracking=1.6)
         # progress: ten small triangles, current one filled
@@ -207,10 +195,10 @@ class Slide:
             x = MX + k * colw
             vs = fit(str(val), 'display', 88, colw - 24, 56)
             self.text(dr, (x, y), str(val), font('display', vs), self.ink)
-            fl = font('body', 30, 500)
+            fl = font('body', 34, 500)
             lab_lines = wrap(lab, fl, colw - 20)[:2]
             for j, ln in enumerate(lab_lines):
-                self.text(dr, (x, y + 92 + j * 36), ln, fl, self.inkA(0.85))
+                self.text(dr, (x, y + 92 + j * 40), ln, fl, self.inkA(0.85))
             if k:
                 dr.line([(x - 16) * S, (y + 8) * S, (x - 16) * S, (y + 150) * S], fill=self.inkA(0.35), width=int(2 * S))
 
@@ -236,16 +224,17 @@ class Slide:
         self.put(t, 0.9, lambda dr: self.text(dr, (MX, hy + 196), d['hook']['unit'].upper(), font('display', fit(d['hook']['unit'].upper(), 'display', 84, 900)), self.ink))
 
         def footer(dr):
-            f = font('body', 36, 400)
+            fs = 46
+            f = font('body', fs, 500)
             l1_, l2_ = d['footer']
-            y1 = 1196
+            y1 = 1190
             self.text(dr, (W / 2, y1), l1_, f, self.ink, 'ms')
-            # arrow after line 1, on the middle of the x-height (Garmin School carousel rule)
-            x = W / 2 + tw(l1_, f) / 2 + 26
-            ym = y1 - 36 * 0.26
-            dr.line([x * S, ym * S, (x + 92) * S, ym * S], fill=self.ink, width=int(2.4 * S))
-            dr.polygon([((x + 104) * S, ym * S), ((x + 90) * S, (ym - 6) * S), ((x + 90) * S, (ym + 6) * S)], fill=self.ink)
-            self.text(dr, (W / 2, y1 + 46), l2_, font('body', 32, 400), self.inkA(0.85), 'ms')
+            # arrow after line 1, on the middle of the x-height (Garmin School carousel rule), scaled with the text
+            x = W / 2 + tw(l1_, f) / 2 + 28
+            ym = y1 - fs * 0.26
+            dr.line([x * S, ym * S, (x + 110) * S, ym * S], fill=self.ink, width=int(3.2 * S))
+            dr.polygon([((x + 126) * S, ym * S), ((x + 108) * S, (ym - 8) * S), ((x + 108) * S, (ym + 8) * S)], fill=self.ink)
+            self.text(dr, (W / 2, y1 + 54), l2_, font('body', 38, 400), self.inkA(0.88), 'ms')
         self.put(t, 1.3, footer, rise=20)
 
     def m_big_number(self, t, d):
@@ -307,7 +296,7 @@ class Slide:
             def lab(dr, cx=cx, it=it):
                 ns = fit(it['name'].upper(), 'display', 62, 300, 40)
                 self.text(dr, (cx, base + 30), it['name'].upper(), font('display', ns), self.ink, 'mt')
-                self.text(dr, (cx, base + 98), f"{it['hours']:,.0f} h · {it['sessions']}×", font('body', 34, 500), self.inkA(0.88), 'mt')
+                self.text(dr, (cx, base + 98), f"{it['hours']:,.0f} h · {it['sessions']}×", font('body', 38, 500), self.inkA(0.88), 'mt')
             self.put(t, 1.0 + 0.15 * slot, lab)
 
     def m_route(self, t, d):
@@ -373,7 +362,7 @@ class Slide:
         self.put(t, 0.65, chart, rise=0, dur=0.25)
         def months(dr):
             m = d0.replace(day=1)
-            f = font('body', 30, 500)
+            f = font('body', 34, 500)
             while m <= d1:
                 x = box[0] + (m - d0).days / span * (box[2] - box[0])
                 if box[0] - 5 <= x <= box[2]:
@@ -395,12 +384,12 @@ class Slide:
                 self.tri(dr, MX + 54, yy + 58, 16, fill=self.acc if self.acc != self.ink else self.bg)
                 fs = fit(r['value'], 'display', 168, 470, 90)
                 room = (W - 2 * MX) - tw(r['value'], font('display', fs)) - 170
-                ls = fit(r['label'].upper(), 'body', 36, room, 30, 600)
+                ls = fit(r['label'].upper(), 'body', 38, room, 34, 600)
                 lab = r['label'].upper()
                 while tw(lab, font('body', ls, 600)) > room and ' ' in lab:
                     lab = lab.rsplit(' ', 1)[0]
                 self.text(dr, (MX + 86, yy + 58), lab, font('body', ls, 600), self.bg, 'lm')
-                self.text(dr, (MX + 40, yy + 150), r['date'], font('body', 34, 400), self.bg[:3] + (220,), 'lm')
+                self.text(dr, (MX + 40, yy + 150), r['date'], font('body', 38, 400), self.bg[:3] + (220,), 'lm')
                 self.text(dr, (W - MX - 40, yy + hgt / 2 + 6), r['value'], font('display', fs), self.bg, 'rm')
             self.put(t, 0.5 + 0.22 * k, card, rise=70)
 
@@ -412,7 +401,7 @@ class Slide:
         months = end.month
         top, rowh = 372, min(56, 620 / months)
         x0, cw = MX + 58, (W - 2 * MX - 58) / 31
-        fl = font('body', 30, 600)
+        fl = font('body', 34, 600)
         for m in range(1, months + 1):
             yy = top + (m - 1) * rowh
             def row(dr, m=m, yy=yy):
@@ -448,7 +437,7 @@ class Slide:
                 tip = (cx + (r0 + 14 + L) * math.cos(a), cy + (r0 + 14 + L) * math.sin(a))
                 col = self.acc if h == d['peak'] else self.inkA(0.85)
                 dr.polygon([(p[0] * S, p[1] * S) for p in (base1, tip, base2)], fill=col)
-            f = font('body', 30, 600)
+            f = font('body', 34, 600)
             for h, lab in ((0, '12 AM'), (6, '6 AM'), (12, '12 PM'), (18, '6 PM')):
                 a = -math.pi / 2 + h / 24 * 2 * math.pi
                 rr = r1 + 52
@@ -464,9 +453,9 @@ class Slide:
         lv = int(round(L['value'] * ease_expo(t, 0.45, 1.3)))
         rv = int(round(R['value'] * ease_expo(t, 0.75, 1.3)))
         self.put(t, 0.45, lambda dr: (self.text(dr, (290, 640), str(lv), font('display', 320), self.ink, 'ms'),
-                                      self.text(dr, (290, 700), L['label'].upper(), font('body', 36, 600), self.inkA(0.9), 'ms')), rise=50)
+                                      self.text(dr, (290, 700), L['label'].upper(), font('body', 40, 600), self.inkA(0.9), 'ms')), rise=50)
         self.put(t, 0.75, lambda dr: (self.text(dr, (790, 640), str(rv), font('display', 320), self.acc, 'ms'),
-                                      self.text(dr, (790, 700), R['label'].upper(), font('body', 36, 600), self.inkA(0.9), 'ms')), rise=50)
+                                      self.text(dr, (790, 700), R['label'].upper(), font('body', 40, 600), self.inkA(0.9), 'ms')), rise=50)
         self.put(t, 1.0, lambda dr: self.tri(dr, 540, 520, 46, fill=self.ink, rot=math.pi / 2), rise=0)
         self.put(t, 1.4, lambda dr: self.body(dr, d['body'], 800, TYPE['body'], anchor='ma', max_w=860))
 
@@ -506,14 +495,14 @@ class Slide:
         self.put(t, 0.9, lambda dr: self.body(dr, d['body'], by, TYPE['body']))
         py = by + 42 * 1.22 * len(wrap(d['body'], font('body', TYPE['body']), W - 2 * MX)) + 50
         x = MX
-        fp = font('body', 34, 600)
+        fp = font('body', 38, 600)
         for k, tr in enumerate(d.get('traits', [])):
             w_ = tw(tr, fp) + 64
             if x + w_ > W - MX:
-                x, py = MX, py + 92
+                x, py = MX, py + 96
             def pill(dr, x=x, py=py, tr=tr, w_=w_):
-                self.rrect(dr, (x, py, x + w_, py + 70), 35, outline=self.ink, width=3)
-                self.text(dr, (x + w_ / 2, py + 36), tr, fp, self.ink, 'mm')
+                self.rrect(dr, (x, py, x + w_, py + 76), 38, outline=self.ink, width=3)
+                self.text(dr, (x + w_ / 2, py + 39), tr, fp, self.ink, 'mm')
             self.put(t, 1.2 + 0.12 * k, pill, rise=20)
             x += w_ + 18
 
@@ -535,7 +524,7 @@ class Slide:
         self.put(t, 0.5, lambda dr: self.text(dr, (W / 2, 735), l1, font('display', size), self.ink, 'ms'))
         self.put(t, 0.65, lambda dr: self.text(dr, (W / 2, 735 + size * 0.88), l2, font('display', size), self.acc, 'ms'))
         self.put(t, 0.85, lambda dr: self.body(dr, d['body'], 872, TYPE['body'], anchor='ma'))
-        fp = font('body', 34, 600)
+        fp = font('body', 38, 600)
         pills = [f'{a}  {b}' for a, b in d['handles']]
         ws = [tw(p, fp) + 56 for p in pills]
         rows = [pills] if sum(ws) + 16 * (len(ws) - 1) <= W - 2 * MX else [pills[:2], pills[2:]]
@@ -547,13 +536,13 @@ class Slide:
             for p in row:
                 w_ = tw(p, fp) + 56
                 def pill(dr, x=x, y=y, p=p, w_=w_):
-                    self.rrect(dr, (x, y, x + w_, y + 66), 33, fill=self.ink)
-                    self.text(dr, (x + w_ / 2, y + 34), p, fp, self.bg, 'mm')
+                    self.rrect(dr, (x, y, x + w_, y + 74), 37, fill=self.ink)
+                    self.text(dr, (x + w_ / 2, y + 38), p, fp, self.bg, 'mm')
                 self.put(t, 1.05 + 0.1 * k, pill, rise=20)
                 x += w_ + 16
                 k += 1
-            y += 84
-        self.put(t, 1.5, lambda dr: self.text(dr, (W / 2, y + 30), d['site'], font('body', 36, 500), self.inkA(0.9), 'ms'))
+            y += 90
+        self.put(t, 1.5, lambda dr: self.text(dr, (W / 2, y + 30), d['site'], font('body', 40, 500), self.inkA(0.9), 'ms'))
 
 
 # ============================================================================================ output
@@ -578,76 +567,107 @@ def ffmpeg_exe():
         return None
 
 
-def bg_frames(i, n):
-    """Yield n background frames (1080x1350 RGB). Loop video if possible, else a slow zoom on the still."""
-    p = os.path.join(BG_DIR, f'bg_{i + 1:02d}.mp4')
+def video_backend():
     exe = ffmpeg_exe()
-    frames = []
-    if os.path.exists(p) and exe:
-        raw = subprocess.run([exe, '-v', 'error', '-i', p, '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-'], capture_output=True).stdout
-        fs = W * H * 3
-        frames = [Image.frombytes('RGB', (W, H), raw[k:k + fs]) for k in range(0, len(raw) - fs + 1, fs)]
-    elif os.path.exists(p):
-        try:
-            import cv2
-            cap = cv2.VideoCapture(p)
-            while True:
-                ok, fr = cap.read()
-                if not ok:
-                    break
-                frames.append(Image.fromarray(fr[:, :, ::-1]))
-        except Exception:
-            frames = []
-    if frames:
-        for k in range(n):
-            yield frames[k % len(frames)]
-        return
-    still = bg_still(i)
-    for k in range(n):
-        z = 1 + 0.03 * k / max(1, n - 1)
-        w, h = int(W * S / z), int(H * S / z)
-        x, y = (W * S - w) // 2, (H * S - h) // 2
-        yield still.crop((x, y, x + w, y + h)).resize((W, H), Image.BILINEAR)
+    if exe:
+        return 'ffmpeg', exe
+    try:
+        import cv2, numpy  # noqa: F401
+        return 'opencv', None
+    except Exception:
+        return None, None
 
 
-class Encoder:
-    def __init__(self, path):
-        self.path, self.cv, self.proc = path, None, None
-        exe = ffmpeg_exe()
-        if exe:
-            self.proc = subprocess.Popen([exe, '-v', 'error', '-y', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-s', f'{W}x{H}', '-r', str(FPS),
-                                          '-i', '-', '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '19', '-pix_fmt', 'yuv420p',
-                                          '-movflags', '+faststart', path], stdin=subprocess.PIPE)
-        else:
-            import cv2  # last resort (MPEG-4 Part 2; Instagram and TikTok accept it)
-            self.cv = cv2.VideoWriter(path, cv2.VideoWriter_fourcc(*'mp4v'), FPS, (W, H))
+NO_VIDEO = """VIDEO: NOT POSSIBLE YET — no ffmpeg and no OpenCV in this environment.
+Fix (try in this order, then run --check again):
+  1. pip install imageio-ffmpeg
+  2. no internet? download https://garmin.vaw.be/wrapped/vendor/imageio_ffmpeg-0.7.0-py3-none-manylinux2014_x86_64.whl
+     (or ask the user to download and upload it) and run: pip install <that .whl file>
+Never hand over PNGs instead of the MP4s the user asked for."""
 
-    def write(self, im):
-        if self.proc:
-            self.proc.stdin.write(im.tobytes())
-        else:
-            import numpy as np
-            self.cv.write(np.asarray(im)[:, :, ::-1])
 
-    def close(self):
-        if self.proc:
-            self.proc.stdin.close()
-            self.proc.wait()
-        else:
-            self.cv.release()
+def check():
+    import platform
+    import PIL
+    print(f'python {platform.python_version()} · Pillow {PIL.__version__}')
+    ok = all(os.path.exists(os.path.join(FONT_DIR, f)) for f in TOK['fonts'].values())
+    bgs = sum(os.path.exists(os.path.join(BG_DIR, f'bg_{i:02d}.mp4')) for i in range(1, 11))
+    print(f'fonts: {"OK" if ok else "MISSING"} · background loops: {bgs}/10 · background stills: '
+          f'{sum(os.path.exists(os.path.join(BG_DIR, f"bg_{i:02d}.jpg")) for i in range(1, 11))}/10')
+    backend, exe = video_backend()
+    if backend == 'ffmpeg':
+        print(f'VIDEO: OK (ffmpeg: {exe})')
+    elif backend == 'opencv':
+        print('VIDEO: OK (OpenCV fallback)')
+    else:
+        print(NO_VIDEO)
+    return 0 if backend and ok and bgs == 10 else 2
+
+
+def write_video(i, overlay, path):
+    """MP4 1080x1350: the 6 s seamless background loop with the static data layer on top. Loops on its own."""
+    backend, exe = video_backend()
+    if not backend:
+        raise SystemExit(NO_VIDEO)
+    bgp = os.path.join(BG_DIR, f'bg_{i + 1:02d}.mp4')
+    if backend == 'ffmpeg':
+        ovp = path[:-4] + '_overlay.png'
+        overlay.save(ovp)
+        if os.path.exists(bgp):
+            src = ['-i', bgp]
+        else:  # no loop file: hold the still (no motion, but still a valid clip)
+            src = ['-loop', '1', '-framerate', str(FPS), '-t', str(SECONDS), '-i', os.path.join(BG_DIR, f'bg_{i + 1:02d}.jpg')]
+        cmd = [exe, '-v', 'error', '-y', *src, '-i', ovp, '-filter_complex',
+               f'[0:v]scale={W}:{H},setsar=1[b];[b][1:v]overlay=0:0,format=yuv420p[v]', '-map', '[v]',
+               '-t', str(SECONDS), '-r', str(FPS), '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '18',
+               '-movflags', '+faststart', '-an', path]
+        subprocess.run(cmd, check=True)
+        os.remove(ovp)
+    else:
+        import cv2
+        import numpy as np
+        ov = np.asarray(overlay).astype(np.float32)
+        alpha, rgb = ov[:, :, 3:4] / 255.0, ov[:, :, :3][:, :, ::-1]
+        frames = []
+        cap = cv2.VideoCapture(bgp) if os.path.exists(bgp) else None
+        while cap is not None:
+            ok, fr = cap.read()
+            if not ok:
+                break
+            frames.append(cv2.resize(fr, (W, H)))
+        if not frames:
+            still = np.asarray(bg_still(i).resize((W, H)))[:, :, ::-1]
+            frames = [still] * (FPS * SECONDS)
+        vw = None
+        for codec in ('avc1', 'mp4v'):
+            vw = cv2.VideoWriter(path, cv2.VideoWriter_fourcc(*codec), FPS, (W, H))
+            if vw.isOpened():
+                break
+        for fr in frames[:FPS * SECONDS]:
+            vw.write((fr * (1 - alpha) + rgb * alpha).astype(np.uint8))
+        vw.release()
+    if not (os.path.exists(path) and os.path.getsize(path) > 10000):
+        raise SystemExit(f'Video failed for slide {i + 1}: {path} was not written.')
 
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument('plan')
+    ap.add_argument('plan', nargs='?')
     ap.add_argument('--out', default='garmin_wrapped_out')
-    ap.add_argument('--stills', action='store_true')
-    ap.add_argument('--video', action='store_true')
+    ap.add_argument('--stills', action='store_true', help='PNG 2160x2700 per slide')
+    ap.add_argument('--video', action='store_true', help='MP4 1080x1350 per slide, 6 s seamless loop')
     ap.add_argument('--slides', type=int, nargs='*')
-    ap.add_argument('--sheet', action='store_true')
+    ap.add_argument('--sheet', action='store_true', help='contact_sheet.png with all slides, to check the result')
+    ap.add_argument('--check', action='store_true', help='check fonts, backgrounds and video support, then exit')
     a = ap.parse_args()
+    if a.check:
+        sys.exit(check())
+    if not a.plan:
+        ap.error('give the path to wrapped.json')
     if not (a.stills or a.video):
         a.stills = True
+    if a.video and video_backend()[0] is None:
+        raise SystemExit(NO_VIDEO)
     plan = json.load(open(a.plan))
     slides = plan['slides']
     os.makedirs(a.out, exist_ok=True)
@@ -656,33 +676,22 @@ def main():
     for i in which:
         sl = Slide(i, slides[i], len(slides))
         name = os.path.join(a.out, f'garmin_wrapped_{year}_{i + 1:02d}')
+        layer = sl.render(99)
+        im = bg_still(i)
+        im.paste(layer, (0, 0), layer)
         if a.stills:
-            im = bg_still(i)
-            im.paste(sl.render(OUT_START - 0.05), (0, 0), sl.img)  # fully revealed, before the loop clears
             im.save(name + '.png', optimize=True)
             print('png', name + '.png', flush=True)
+        else:
+            im.resize((W // 3, H // 3), Image.LANCZOS).save(name + '_thumb.jpg', quality=85)  # for the contact sheet
         if a.video:
-            n = int(round(SECONDS * FPS))  # = one background loop, so the clip loops seamlessly
-            enc = Encoder(name + '.mp4')
-            static = None
-            for k, bg in enumerate(bg_frames(i, n)):
-                t = k / FPS
-                hold = STATIC_AFTER <= t < OUT_START
-                if hold and static is not None:
-                    ov = static
-                else:
-                    ov = sl.render(t).resize((W, H), Image.LANCZOS)
-                    if hold:
-                        static = ov
-                fr = bg.copy()
-                fr.paste(ov, (0, 0), ov)
-                enc.write(fr)
-            enc.close()
+            write_video(i, layer.resize((W, H), Image.LANCZOS), name + '.mp4')
             print('mp4', name + '.mp4', flush=True)
     if a.sheet:
         ims = []
         for i in range(len(slides)):
-            p = os.path.join(a.out, f'garmin_wrapped_{year}_{i + 1:02d}.png')
+            base = os.path.join(a.out, f'garmin_wrapped_{year}_{i + 1:02d}')
+            p = base + '.png' if os.path.exists(base + '.png') else base + '_thumb.jpg'
             if os.path.exists(p):
                 ims.append(Image.open(p).convert('RGB').resize((W // 3, H // 3)))
         if ims:
@@ -691,6 +700,9 @@ def main():
                 sheet.paste(im, (k * W // 3, 0))
             sheet.save(os.path.join(a.out, 'contact_sheet.png'))
             print('sheet', os.path.join(a.out, 'contact_sheet.png'))
+        for f in os.listdir(a.out):
+            if f.endswith('_thumb.jpg'):
+                os.remove(os.path.join(a.out, f))
 
 
 if __name__ == '__main__':

@@ -7,3 +7,4 @@ example/*/out/*.mp4
 !example/*/out/contact_sheet.png
 out/
 data/
+tools/vendor/

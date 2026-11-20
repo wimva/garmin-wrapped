@@ -49,11 +49,13 @@ Never place text on a 3D shape except the intro title. A fine film grain sits on
 | headline | Bebas Neue, uppercase | 84–112 |
 | unit under a number | Bebas Neue | 104 |
 | body | Geist Regular, line height 1.22 (same as the Garmin School carousels) | 42 |
-| kicker above a headline | Geist SemiBold, uppercase, +2 tracking | 34 |
-| stat labels, pills, month letters | Geist Medium/SemiBold | 30–36 |
-| "BY THE GARMIN SCHOOL" tag | Geist SemiBold, uppercase | 30 |
+| kicker above a headline | Geist SemiBold, uppercase, +2 tracking | 36 |
+| stat labels, month letters, dial labels | Geist Medium/SemiBold | 34 |
+| pills (traits, handles), dates, sub-labels | Geist SemiBold | 38–40 |
+| slide 1 footer ("Swipe through my year →") | Geist Medium, arrow scaled with it | 46, second line 38 |
+| "BY THE GARMIN SCHOOL" tag | Geist SemiBold, uppercase | 34 |
 
-**Minimum size anywhere: 30 px.** If text doesn't fit, the kit shrinks it to the minimum and then wraps it; it
+**Minimum size anywhere: 34 px** (on the 1080 px artboard). If text doesn't fit, the kit shrinks it to the minimum and then wraps it; it
 never cuts a value.
 
 ## Layout
@@ -70,13 +72,11 @@ never cuts a value.
 
 ## Motion (animated version)
 
-- Background: the three.js strip loops seamlessly every 6 s; shapes wobble and drift with GSAP sine yoyos,
-  confetti orbits and spins.
-- Data layer: kicker → headline → number, staggered 0.1–0.4 s; elements rise 40 px while fading in
-  (ease-out cubic); numbers count up with an exponential ease over ~1.6 s; lines and routes draw on; the
-  calendar fills month by month; podium triangles grow. Everything has settled by 3 s and holds; in the
-  last 0.85 s it clears again (reverse fade), so the last frame equals the first and the clip loops seamlessly
-  on Instagram and TikTok. The background loop is exactly 6 s, the same length as the clip.
+- Only the background moves (Wim, 2026-11-20): the three.js strip loops seamlessly every 6 s, shapes wobble
+  and drift with GSAP sine yoyos, confetti orbits and spins.
+- The data layer (text, numbers, charts, avatar) is **static**: no build-in, no build-out. Every MP4 is exactly
+  one 6 s background loop, so it loops seamlessly on its own on Instagram and TikTok.
+- One MP4 per slide (1080 × 1350, 25 fps, H.264), never one combined reel.
 
 ## Slide modules
 

@@ -36,6 +36,16 @@ with zipfile.ZipFile(zp, 'w', zipfile.ZIP_DEFLATED) as z:
             full = os.path.join(dp, f)
             z.write(full, os.path.relpath(full, ROOT))
 
+# offline ffmpeg for sandboxes without internet (ChatGPT): the imageio-ffmpeg Linux wheel, if downloaded to tools/vendor
+wheels = []
+vend = os.path.join(ROOT, 'tools', 'vendor')
+if os.path.isdir(vend):
+    os.makedirs(os.path.join(PUB, 'vendor'), exist_ok=True)
+    for f in os.listdir(vend):
+        if f.endswith('.whl'):
+            shutil.copy(os.path.join(vend, f), os.path.join(PUB, 'vendor', f))
+            wheels.append(f'{BASE}/vendor/{f}')
+
 # raw text + kit files
 for src, dst in [('PROMPT.md', 'PROMPT.md'), ('STYLEGUIDE.md', 'STYLEGUIDE.md'), ('kit/SCHEMA.md', 'SCHEMA.md'),
                  ('kit/style/tokens.json', 'tokens.json'), ('kit/compute.py', 'compute.py'), ('kit/wrapped.py', 'wrapped.py'),
@@ -80,13 +90,14 @@ manifest = {
     'prompt': f'{BASE}/PROMPT.md', 'schema': f'{BASE}/SCHEMA.md', 'styleguide': f'{BASE}/STYLEGUIDE.md',
     'tokens': f'{BASE}/tokens.json', 'compute_py': f'{BASE}/compute.py', 'wrapped_py': f'{BASE}/wrapped.py',
     'avatar': f'{BASE}/avatar.jpg',
+    'ffmpeg_wheel': wheels[0] if wheels else None,
     'scene': {'url': f'{BASE}/scene/index.html', 'usage': 'Open ?slide=1..10 to play one slide window of the background strip; window.drawSlide(i0, t) renders slide i0 (0-based) at time t seconds; the loop is 6 s.'},
     'example_slides': slides, 'example_clips': clips, 'backgrounds_preview': f'{BASE}/img/backgrounds.jpg',
     'format': tokens['artboard'], 'type': tokens['type'], 'slides': tokens['slides'],
     'handles': {'instagram': '@vawbe', 'tiktok': '@vaw.be', 'youtube': '@vawbe', 'site': 'garmin.vaw.be'},
     'steps': ['Ask: stills or animated, first name, show real age, units', 'Download the kit zip',
               'Fetch Garmin data into data/*.json per SCHEMA.md', 'python kit/compute.py data',
-              'python kit/wrapped.py data/wrapped.json --out out --stills|--video --sheet', 'Check contact_sheet.png, deliver files 01–10'],
+              'python kit/wrapped.py --check (animated needs VIDEO: OK)', 'python kit/wrapped.py data/wrapped.json --out out --stills|--video --sheet', 'Check contact_sheet.png, list out/, offer download links for files 01–10 + a zip'],
 }
 json.dump(manifest, open(os.path.join(PUB, 'manifest.json'), 'w'), indent=1)
 

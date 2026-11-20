@@ -23,7 +23,8 @@ Garmin connector (MCP)  →  data/*.json  →  kit/compute.py  →  wrapped.json
    the module library, with the athlete's main sports first. It needs only the Python standard library.
 3. **Render:** `python kit/wrapped.py data/wrapped.json --out out --stills` (or `--video`) draws the data
    layer on top of pre-rendered three.js backgrounds. It needs Pillow, plus ffmpeg (or `imageio-ffmpeg`,
-   or OpenCV) for video.
+   or OpenCV) for video; `python kit/wrapped.py --check` says what's available. Animated slides keep the data
+   still and loop the moving background (6 s, seamless), one MP4 per slide, about 2 s per slide to render.
 
 Design rules: [`STYLEGUIDE.md`](STYLEGUIDE.md).
 
@@ -61,7 +62,8 @@ Edit `kit/style/tokens.json` (colours, sizes) and/or `scene/scene.html` (3D comp
 cd scene && npm install && cd ..
 python scene/render_bg.py --stills     # 10 × JPG
 python scene/render_bg.py --loops      # 10 × MP4 (about a minute per slide with software WebGL)
-python tools/export_site.py ../website-garmin   # kit zip, raw files, examples, scene → garmin.vaw.be/wrapped
+pip download imageio-ffmpeg --no-deps --only-binary=:all: --platform manylinux2014_x86_64 -d tools/vendor
+python tools/export_site.py ../website-garmin   # kit zip, raw files, ffmpeg wheel, examples, scene → garmin.vaw.be/wrapped
 ```
 
 ## Privacy

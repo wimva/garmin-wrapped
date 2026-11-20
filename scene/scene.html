@@ -183,6 +183,8 @@ for (let k = 0; k < 520; k++) {
   // keep the content column clear: confetti only in the outer frame of every slide
   const inCenter = slideX > 45 && slideX < 1035 && y > 135 && y < 1150;
   if (inCenter) continue;
+  // slide 1: keep the swipe footer (bottom centre) clear too
+  if (x < W && y > 1080 && slideX > 100 && slideX < 980) continue;
   const s = 10 + rng() * 18;
   const slide = Math.min(N - 1, Math.floor(x / W));
   const c = rng() < 0.5 ? pal[slide].shape : (rng() < 0.5 ? pal[slide].shape2 : '#FFFFFF');
