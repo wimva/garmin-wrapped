@@ -14,11 +14,12 @@ Not affiliated with Garmin. No Garmin logos are used.
 ## How it works
 
 ```
-Garmin connector (MCP)  →  data/*.json  →  kit/compute.py  →  wrapped.json  →  kit/wrapped.py  →  PNG / MP4
-        the assistant        normalized       picks 8 slides     editable plan     draws the slides
+Garmin connector (MCP) → raw/*.json → kit/adapt.py → data/*.json → kit/compute.py → wrapped.json → kit/wrapped.py → PNG / MP4
+   the assistant        as returned   any connector   normalized     picks 8 slides   editable plan    draws the slides
 ```
 
-1. **Data:** the assistant writes a few small JSON files (format: [`kit/SCHEMA.md`](kit/SCHEMA.md)).
+1. **Data:** the assistant saves the Garmin tool results to `raw/` and `python kit/adapt.py raw data` turns any
+   connector's naming (camelCase Garmin Connect or snake_case) into the kit's format ([`kit/SCHEMA.md`](kit/SCHEMA.md)).
 2. **Plan:** `python kit/compute.py data` computes the stats and chooses the 8 strongest middle slides from
    the module library, with the athlete's main sports first. It needs only the Python standard library.
 3. **Render:** `python kit/wrapped.py data/wrapped.json --out out --stills` (or `--video`) draws the data
@@ -46,13 +47,15 @@ python kit/wrapped.py example/runner/wrapped.json --out out --video
 |---|---|
 | `PROMPT.md` | the prompt people paste into Claude/ChatGPT |
 | `STYLEGUIDE.md` | the "Prism" design language |
-| `kit/compute.py` | stats, sport detection, slide selection, privacy trimming |
+| `kit/adapt.py` | connector adapters: any Garmin MCP response → the kit's data format |
+| `kit/compute.py` | stats, sport detection, slide selection (incl. optional HRV trend), route privacy |
 | `kit/wrapped.py` | renderer (stills + animation), module layouts |
 | `kit/style/tokens.json` | colours, type sizes, layout values (shared by the scene and the renderer) |
 | `kit/assets/bg/` | pre-rendered backgrounds: `bg_NN.jpg` (2160×2700) and `bg_NN.mp4` (6 s seamless loops) |
 | `kit/assets/fonts/` | Bebas Neue and Geist (SIL Open Font License) |
 | `kit/assets/avatar.jpg` | Wim's avatar for the call-to-action slide |
 | `scene/` | the three.js + GSAP source of the backgrounds and `render_bg.py` to re-render them |
+| `tests/` | `python -m unittest discover -s tests`: route privacy, HRV, connector adapters |
 | `tools/` | example data generator, `export_site.py` (publishes everything to garmin.vaw.be) |
 | `example/` | fake datasets (runner, cyclist, lifter) and their rendered slides |
 

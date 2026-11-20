@@ -12,6 +12,9 @@ Pure Python 3 standard library.
 import json, math, os, sys, datetime as dt
 from collections import Counter, defaultdict
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import adapt  # noqa: E402  (connector normalizers: any Garmin MCP naming → SCHEMA.md)
+
 # ----------------------------------------------------------------------------------------------- sports
 FAMILIES = {
     'running': ['running', 'trail_running', 'treadmill_running', 'track_running', 'indoor_running', 'street_running', 'ultra_run', 'virtual_run'],
@@ -106,8 +109,10 @@ MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'Augus
 class Year:
     def __init__(self, data_dir):
         self.dir = data_dir
-        prof = load(data_dir, 'profile.json', {})
+        raw_prof = load(data_dir, 'profile.json', {})
+        prof = dict(raw_prof, **adapt.norm_profile(raw_prof))
         self.prof = prof
+        clock = adapt.Clock(prof.get('timezone'), prof.get('utc_offset_hours'))
         self.imperial = str(prof.get('units', 'metric')).lower().startswith('imp')
         today = dt.date.today()
         self.year = int(prof.get('year', today.year))
@@ -116,7 +121,8 @@ class Year:
         self.name = (prof.get('first_name') or '').strip()
 
         acts = []
-        for a in load(data_dir, 'activities.json', []):
+        for a in adapt.records(load(data_dir, 'activities.json', [])):
+            a = adapt.norm_activity(a, clock)   # idempotent: already-normalized records pass through unchanged
             try:
                 day = d(a.get('date') or a.get('start_local'))
             except Exception:
@@ -130,10 +136,13 @@ class Year:
             a['_dist'] = num(a.get('distance_m')) or 0.0
             acts.append(a)
         self.acts = sorted(acts, key=lambda a: a.get('start_local') or str(a['_day']))
-        self.daily = [x for x in load(data_dir, 'daily.json', []) if self._in(x)]
-        self.sleep = [x for x in load(data_dir, 'sleep.json', []) if self._in(x)]
-        self.vo2 = sorted([x for x in load(data_dir, 'vo2max.json', []) if self._in(x) and num(x.get('value'))], key=lambda x: x['date'])
-        self.hrv = sorted([x for x in load(data_dir, 'hrv.json', []) if self._in(x) and num(x.get('value'))], key=lambda x: x['date'])
+        self.daily = [x for x in (adapt.norm_daily(r, clock) for r in adapt.records(load(data_dir, 'daily.json', []))) if self._in(x)]
+        self.sleep = [x for x in (adapt.norm_sleep(r, clock) for r in adapt.records(load(data_dir, 'sleep.json', []))) if self._in(x)]
+        # VO2 max / HRV: real measurements only (no carried-forward repeats, no zeros for missing nights)
+        self.vo2 = sorted([x for x in (adapt.norm_point(r, clock, adapt.VO2_KEYS) for r in adapt.records(load(data_dir, 'vo2max.json', [])))
+                           if x and self._in(x)], key=lambda x: x['date'])
+        self.hrv = sorted([x for x in (adapt.norm_point(r, clock, adapt.HRV_KEYS) for r in adapt.records(load(data_dir, 'hrv.json', [])))
+                           if x and self._in(x)], key=lambda x: x['date'])
 
     def _in(self, x):
         try:
@@ -287,29 +296,30 @@ def build_candidates(y):
         if len(dsp) >= 5:
             top = sorted(dsp, key=lambda a: -a['_dist'])[:3]
             C.append((76 if top_fam in DISTANCE_SPORTS else 60, {'module': 'records', 'key': 'records', 'kicker': 'Biggest days', 'headline': f'My longest {VERB.get(top_fam, "sessions").replace("rode", "rides").replace("ran", "runs").replace("swam", "swims").replace("walked", "walks").replace("hiked", "hikes").replace("rowed", "rows")}' if top_fam in VERB else 'Longest sessions',
-                           'rows': [{'label': (a.get('name') or fam_name(a['_fam']))[:28], 'value': f'{y.km(a["_dist"]):.0f} {y.dunit}' if y.km(a['_dist']) >= 100 else f'{y.km(a["_dist"]):.1f} {y.dunit}',
+                           'rows': [{'label': fam_name(a['_fam']), 'value': f'{y.km(a["_dist"]):.0f} {y.dunit}' if y.km(a['_dist']) >= 100 else f'{y.km(a["_dist"]):.1f} {y.dunit}',
                                      'date': a['_day'].strftime('%b %d').replace(' 0', ' ')} for a in top]}))
 
-    # 4. go-to route
+    # 4. go-to route (privacy: only if it can be trimmed safely; the plan gets an anonymous shape, never coordinates)
     cl = y.route_clusters()
     if cl and len(cl[0]['acts']) >= 4:
         c = cl[0]
-        rep = c['acts'][len(c['acts']) // 2]
-        route = None
-        for a in c['acts']:
-            p = os.path.join(y.dir, 'routes', f'{a.get("id")}.json')
-            if os.path.exists(p):
-                route = load(y.dir, os.path.join('routes', f'{a.get("id")}.json'), None)
+        files = [os.path.join(y.dir, 'routes', f'{a.get("id")}.json') for a in c['acts']]
+        files = [f for f in files if os.path.exists(f)]
+        shape = loop = None
+        for f in files:
+            raw = adapt.norm_route(load(os.path.dirname(f), os.path.basename(f), []))
+            safe = trim_route(raw)
+            if safe:
+                shape = route_shape(safe)
+                loop = hav(raw[0], raw[-1]) < 300
                 break
-        if route and len(route) > 10:
+        if shape:
             C.append((88, {'module': 'route', 'key': 'route', 'kicker': f'{fam_name(c["fam"])} · most repeated route',
-                           'headline': 'My go-to route', 'points': trim_route(route),
-                           'count': len(c['acts']),
-                           'body': f'{len(c["acts"])}× this {y.km(c["dist"]):.1f} {y.dunit} loop'
-                                   if hav(route[0], route[-1]) < 300 else f'{len(c["acts"])}× this {y.km(c["dist"]):.1f} {y.dunit} route',
-                           '_route_id': rep.get('id')}))
-        else:
+                           'headline': 'My go-to route', 'shape': shape, 'count': len(c['acts']),
+                           'body': f'{len(c["acts"])}× this {y.km(c["dist"]):.1f} {y.dunit} {"loop" if loop else "route"}'}))
+        elif not files:
             C.append((0, {'module': '_need_route', 'activity_ids': [a.get('id') for a in c['acts'][:3]]}))
+        # files exist but none could be trimmed safely → no route slide (never an untrimmed fallback)
 
     # 5. calendar
     days = y.active_days()
@@ -342,6 +352,18 @@ def build_candidates(y):
                        'delta': big(delta, 1, '+' if delta > 0 else ''), 'series': [[x['date'], num(x['value'])] for x in y.vo2],
                        'start_label': f'{v[0]:.1f}', 'end_label': f'{v[-1]:.1f}', 'peak': round(max(v), 1),
                        'body': f'From {v[0]:.1f} in {first_m} to {v[-1]:.1f} in {last_m}.' + (f' Peak: {max(v):.1f}.' if max(v) - v[-1] >= 0.3 else '')}))
+
+    # 7b. HRV trend (optional; competes in the ranking like every module)
+    hrv = hrv_stats(y)
+    if hrv:
+        delta = hrv['last'] - hrv['first']
+        C.append((62 if abs(delta) >= 3 else 42, {
+            'module': 'trend', 'key': 'hrv', 'kicker': f'HRV · {hrv["nights"]} nights',
+            'headline': 'My HRV went up' if delta >= 3 else ('My HRV this year' if delta > -3 else 'My HRV this year'),
+            'delta': big(delta, 0, '+' if delta > 0 else '', ' ms') if abs(delta) >= 3 else big(hrv['avg'], 0, '', ' ms'),
+            'series': hrv['series'], 'start_label': f'{hrv["first"]:.0f}', 'end_label': f'{hrv["last"]:.0f}', 'peak': None,
+            'body': (f'Average {hrv["avg"]:.0f} ms. From {hrv["first"]:.0f} ms in {hrv["first_month"]} to {hrv["last"]:.0f} ms in '
+                     f'{hrv["last_month"]}. Best month: {hrv["best_month"]}.')}))
 
     # 8. fitness age
     fa, age = num(y.prof.get('fitness_age')), num(y.prof.get('age'))
@@ -431,21 +453,80 @@ def monthly(pairs):
     return [[k + '-15', round(sum(v) / len(v), 1)] for k, v in sorted(by.items())]
 
 
-def trim_route(pts, cut_m=200):
-    """Privacy: drop the first and last ~200 m so nobody can find a front door. Then thin to <= 400 points."""
-    pts = [(float(p[0]), float(p[1])) for p in pts if p and p[0] is not None]
-    def cut(seq):
-        acc = 0
+ROUTE_CUT_M = 200          # removed at both ends, always
+ROUTE_MIN_KEEP_M = 600     # what must remain after trimming, or there is no route slide
+ROUTE_MIN_POINTS = 8       # sparse polylines are skipped
+
+
+def trim_route(pts, cut_m=ROUTE_CUT_M, min_keep_m=ROUTE_MIN_KEEP_M, min_points=ROUTE_MIN_POINTS):
+    """Privacy: remove exactly the first and last `cut_m` metres (interpolated, not just whole points).
+    Returns the trimmed [(lat, lon), ...], or None when the route can't be trimmed safely (too short, too
+    sparse, invalid). Never returns an untrimmed route."""
+    pts = [tuple(p) for p in adapt.norm_route(pts or [])]
+    pts = [p for i, p in enumerate(pts) if i == 0 or p != pts[i - 1]]
+    if len(pts) < min_points:
+        return None
+    total = sum(hav(pts[i - 1], pts[i]) for i in range(1, len(pts)))
+    if total < 2 * cut_m + min_keep_m:
+        return None
+
+    def cut_front(seq, dist):
+        acc = 0.0
         for i in range(1, len(seq)):
-            acc += hav(seq[i - 1], seq[i])
-            if acc >= cut_m:
-                return seq[i:]
-        return seq
-    if len(pts) > 20:
-        pts = cut(pts)
-        pts = cut(pts[::-1])[::-1]
-    step = max(1, len(pts) // 400)
-    return [[round(a, 6), round(b, 6)] for a, b in pts[::step]]
+            seg = hav(seq[i - 1], seq[i])
+            if acc + seg >= dist:
+                f = (dist - acc) / seg if seg > 0 else 0.0
+                a, b = seq[i - 1], seq[i]
+                start = (a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f)
+                return [start] + seq[i:]
+            acc += seg
+        return []
+
+    t = cut_front(pts, cut_m)
+    t = cut_front(t[::-1], cut_m)[::-1]
+    if len(t) < min_points:
+        return None
+    kept = sum(hav(t[i - 1], t[i]) for i in range(1, len(t)))
+    if kept < min_keep_m * 0.95:
+        return None
+    return t
+
+
+def route_shape(pts, max_points=400):
+    """Trimmed GPS points → an anonymous shape: x/y in 0..1 (north up, aspect kept), no geographic values left."""
+    lat0 = sum(p[0] for p in pts) / len(pts)
+    xy = [(p[1] * math.cos(math.radians(lat0)), -p[0]) for p in pts]
+    x0, y0 = min(x for x, _ in xy), min(y for _, y in xy)
+    span = max(max(x for x, _ in xy) - x0, max(y for _, y in xy) - y0) or 1.0
+    step = max(1, len(xy) // max_points)
+    shape = [[round((x - x0) / span, 4), round((y - y0) / span, 4)] for x, y in xy[::step]]
+    if shape[-1] != [round((xy[-1][0] - x0) / span, 4), round((xy[-1][1] - y0) / span, 4)]:
+        shape.append([round((xy[-1][0] - x0) / span, 4), round((xy[-1][1] - y0) / span, 4)])
+    return shape
+
+
+HRV_MIN_NIGHTS = 30
+HRV_MIN_MONTHS = 3
+HRV_MIN_NIGHTS_PER_MONTH = 5
+
+
+def hrv_stats(y):
+    """Monthly HRV from real nightly measurements (missing nights are absent, never 0). None if too little data."""
+    vals = [(d(x['date']), num(x['value'])) for x in y.hrv if num(x.get('value')) and num(x['value']) > 0]
+    if len(vals) < HRV_MIN_NIGHTS:
+        return None
+    by = defaultdict(list)
+    for day_, v in vals:
+        by[(day_.year, day_.month)].append(v)
+    months = [(k, sum(v) / len(v)) for k, v in sorted(by.items()) if len(v) >= HRV_MIN_NIGHTS_PER_MONTH]
+    if len(months) < HRV_MIN_MONTHS:
+        return None
+    best = max(months, key=lambda m: m[1])
+    return {'nights': len(vals), 'avg': sum(v for _, v in vals) / len(vals),
+            'first': months[0][1], 'last': months[-1][1],
+            'first_month': MONTHS[months[0][0][1] - 1], 'last_month': MONTHS[months[-1][0][1] - 1],
+            'best_month': MONTHS[best[0][1] - 1],
+            'series': [[f'{yy}-{mm:02d}-15', round(v, 1)] for (yy, mm), v in months]}
 
 
 def persona(y):
@@ -489,7 +570,7 @@ def persona(y):
             'name': name, 'body': desc, 'traits': traits[:3]}
 
 
-ORDER = ['podium', 'hero_', 'records', 'route', 'calendar', 'clock', 'vo2max', 'zones', 'fitness_age', 'rhr', 'sleep', 'steps', 'floors', 'sessions', 'kcal', 'intensity']
+ORDER = ['podium', 'hero_', 'records', 'route', 'calendar', 'clock', 'vo2max', 'hrv', 'zones', 'fitness_age', 'rhr', 'sleep', 'steps', 'floors', 'sessions', 'kcal', 'intensity']
 
 
 def order_key(s):

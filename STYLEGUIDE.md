@@ -87,10 +87,10 @@ never cuts a value.
 | `big_number` | top sport distance/hours, sleep hours, steps, floors, workouts, calories, intensity minutes |
 | `podium` | top 3 sports by hours |
 | `records` | fastest 1K/mile/5K/10K/half/marathon, or the longest sessions for non-runners |
-| `route` | the most repeated route, line only (first/last 200 m removed) |
+| `route` | the most repeated route as an anonymous line shape (first/last 200 m removed; skipped if it can't be trimmed safely) |
 | `calendar` | every active day as a triangle, longest streak, busiest month |
 | `clock` | 24-hour dial of start times, the "power hour" |
-| `trend` | VO2 max (or resting heart rate) through the year |
+| `trend` | VO2 max, HRV (monthly nightly average, optional) or resting heart rate through the year |
 | `versus` | real age vs fitness age |
 | `zones` | time in heart-rate zones |
 | `persona` | training personality: Early Bird, Night Owl, Hybrid Athlete, Streak Machine, Weekend Warrior, Base Builder, the {Sport} Purist, All-Rounder |

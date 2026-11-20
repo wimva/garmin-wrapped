@@ -302,16 +302,17 @@ class Slide:
     def m_route(self, t, d):
         self.put(t, 0.1, lambda dr: self.kicker(dr, d['kicker']))
         self.put(t, 0.22, lambda dr: self.headline(dr, d['headline'], 226))
-        pts = d['points']
-        lat0 = sum(p[0] for p in pts) / len(pts)
-        xy = [(p[1] * math.cos(math.radians(lat0)), -p[0]) for p in pts]
-        x0, x1 = min(p[0] for p in xy), max(p[0] for p in xy)
-        y0, y1 = min(p[1] for p in xy), max(p[1] for p in xy)
+        # 'shape' = anonymous x/y in 0..1 made by compute.py from the trimmed route; never geographic coordinates
+        shp = d.get('shape') or []
+        if len(shp) < 2:
+            return
         box = (110, 370, 970, 960)
-        sc = min((box[2] - box[0]) / max(1e-9, x1 - x0), (box[3] - box[1]) / max(1e-9, y1 - y0))
-        ox = box[0] + ((box[2] - box[0]) - (x1 - x0) * sc) / 2
-        oy = box[1] + ((box[3] - box[1]) - (y1 - y0) * sc) / 2
-        P = [((x - x0) * sc + ox, (y - y0) * sc + oy) for x, y in xy]
+        w_ = max(x for x, _ in shp) or 1e-9
+        h_ = max(y for _, y in shp) or 1e-9
+        sc = min((box[2] - box[0]) / w_, (box[3] - box[1]) / h_)
+        ox = box[0] + ((box[2] - box[0]) - w_ * sc) / 2
+        oy = box[1] + ((box[3] - box[1]) - h_ * sc) / 2
+        P = [(x * sc + ox, y * sc + oy) for x, y in shp]
         g = ease(t, 0.5, 2.0)
         n = max(2, int(len(P) * g))
         seg = [(x * S, y * S) for x, y in P[:n]]

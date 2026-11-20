@@ -1,7 +1,29 @@
 # Data format for the Garmin Wrapped '26 kit
 
-`compute.py` reads a folder of small, normalized JSON files. Write them **with code**, keeping only the fields
-below. Every file and every field is optional: missing data only means some slides are skipped.
+`compute.py` reads a folder of small, normalized JSON files. Every file and every field is optional: missing
+data only means some slides are skipped.
+
+**Easiest: let the adapter write them.** Save each Garmin tool result as returned into `raw/` (see below) and run
+`python kit/adapt.py raw data`. It understands camelCase Garmin Connect fields (`activityId`, `startTimeLocal`,
+`sleepScores.overall.value`, `hrTimeInZone_1`…) and snake_case connector fields (`id`, `type`, `start_time`,
+`duration_seconds`, `distance_meters`, `elevation_gain_meters`, `avg_hr_bpm`, `sleep_seconds`, `sleep_score`,
+`sleep_start`, `vo2_max`…), epoch seconds/milliseconds and ISO times (converted to the profile timezone), nested
+values, paged or wrapped results, and duplicates. VO2 max values marked `carried_forward` are skipped (not a new
+measurement); missing or zero HRV/VO2 values are skipped, never stored as 0. It writes only the fields below;
+activity names, devices and all GPS except the rounded start point and requested routes are dropped.
+`compute.py` also runs every file through the same normalizers, so slightly different field names still work.
+
+```
+raw/profile.json                  first name, year, end date, units, age, fitness age, timezone (any naming)
+raw/activities/*.json             activity lists (one file per page)
+raw/daily/*.json                  daily summaries
+raw/sleep/*.json                  sleep nights
+raw/vo2max/*.json                 VO2 max history
+raw/hrv/*.json                    HRV history
+raw/routes/<activity_id>.json     GPS polyline of one activity, only when compute.py asks
+```
+
+Keep `raw/` in the sandbox; never hand it to the user.
 
 Dates are local dates `YYYY-MM-DD`. Times are local ISO `YYYY-MM-DDTHH:MM:SS`. Distances are in metres,
 durations in seconds. Only include data from **1 January of the year until today**.
@@ -20,7 +42,8 @@ data/
 ## profile.json
 
 ```json
-{ "first_name": "Alex", "year": 2026, "end_date": "2026-11-20", "units": "metric", "age": 39, "fitness_age": 36 }
+{ "first_name": "Alex", "year": 2026, "end_date": "2026-11-20", "units": "metric", "age": 39, "fitness_age": 36,
+  "timezone": "Europe/Brussels" }
 ```
 
 `first_name` appears on slide 1 (leave it out to show "My year on the wrist"). `age` and `fitness_age`
@@ -75,14 +98,24 @@ Compact is good: `[{"id":1,"date":"2026-01-03","start_local":"2026-01-03T08:12:0
 ## vo2max.json and hrv.json
 
 `[{"date": "2026-01-06", "value": 44.7}, ...]` — VO2 max from the daily max-metrics (`vo2MaxPreciseValue`),
-HRV from the nightly average (`lastNightAvg`). Weekly points are enough.
+HRV from the nightly average (`lastNightAvg`). Only real measurements: no carried-forward repeats, no zeros for
+nights without a value. VO2 max: weekly points are enough. HRV: every night you have — the optional HRV slide
+needs at least 30 nights spread over 3 months (5+ nights per month).
 
 ## routes/<activity_id>.json
 
 After the first `compute.py` run, `wrapped.json` lists `routes_to_fetch`: activity ids of the most repeated
 route. Fetch the GPS polyline of **one** of them (activity details, `geoPolylineDTO.polyline`, ask for
-~400 points) and save `[[lat, lon], [lat, lon], ...]`. `compute.py` cuts the first and last 200 m and only
-the line's shape is drawn: no map, no coordinates, no street names.
+~400 points), save it as returned to `raw/routes/<id>.json` and rerun `adapt.py` (or save
+`[[lat, lon], ...]` straight to `data/routes/<id>.json`).
+
+Route privacy (enforced and tested in `tests/test_route_privacy.py`):
+- invalid points (missing, NaN, out of range, 0/0) are dropped;
+- exactly the first and last 200 m are removed (interpolated along the line), always;
+- a route that is shorter than 1 km, has fewer than 8 valid points, or keeps less than 600 m after trimming gets
+  **no route slide**: there is never an untrimmed fallback;
+- `wrapped.json` only stores an anonymous shape (x/y between 0 and 1). Raw GPS stays in `raw/` and `data/routes/`,
+  never in the plan or the slides; no map, coordinates, street names or addresses are ever drawn.
 
 ## Never include
 

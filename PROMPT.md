@@ -25,19 +25,24 @@ Install what is missing: `pip install pillow imageio-ffmpeg`. Then run `python k
 If I chose animated and it says `VIDEO: NOT POSSIBLE`, fix that now exactly as it says (it may mean uploading one
 file); don't continue until `--check` says `VIDEO: OK`.
 
-**Step 2 — Fetch my data with my Garmin tools** (Jan 1 → today). Follow `kit/SCHEMA.md`:
-- all activities (page through the activity list, 100 at a time, until you pass 1 January)
+**Step 2 — Fetch my data with my Garmin tools** (Jan 1 → today):
+- all activities (page through the activity list until you pass 1 January, whatever paging the tool uses)
 - daily summaries (steps, floors, resting heart rate, intensity minutes, active calories)
 - sleep for every night (sleep tools usually give 31 nights per call)
-- VO2 max history, HRV history, fitness age
-After each tool call, immediately write **only the fields in SCHEMA.md** into the `data/` files with code.
-Never paste raw tool output into a file or into the chat, and never invent or estimate a number: if a tool
-fails or data is missing, leave that part out.
+- VO2 max history, HRV history, fitness age, and my profile (first name, timezone, units)
+
+After each tool call, save what it returned **with code** to `raw/` — `raw/activities/`, `raw/daily/`,
+`raw/sleep/`, `raw/vo2max/`, `raw/hrv/` (one JSON file per call or page) and `raw/profile.json`. Keep the field
+names exactly as the tool gave them; you may leave out fields `kit/SCHEMA.md` doesn't need (names, devices, notes).
+Then run `python kit/adapt.py raw data`: it converts any Garmin connector's format (camelCase Garmin Connect fields
+or snake_case connector fields, epoch or ISO times, any paging) into the kit's format and drops everything else.
+Never invent or estimate a number: if a tool fails or data is missing, leave that part out.
 
 **Step 3 — Plan the slides:** run `python kit/compute.py data`. It picks the 8 strongest middle slides for
 *my* year (a cyclist gets cycling slides, a rower gets rowing, a lifter gets strength). If it prints
-`routes_to_fetch`, get the GPS polyline of one of those activities, save it to `data/routes/<id>.json`
-as `[[lat, lon], ...]` and run `compute.py` again. Show me the 10-slide list. You may reword a
+`routes_to_fetch`, get the GPS polyline of one of those activities, save it as returned to
+`raw/routes/<id>.json`, run `python kit/adapt.py raw data` and `compute.py` again. (The kit trims 200 m off
+both ends and only stores an anonymous shape; if a route can't be trimmed safely, there's simply no route slide.) Show me the 10-slide list. You may reword a
 headline or body in `data/wrapped.json` to make it sound more like me, but keep every number as computed.
 
 **Step 4 — Render with the kit's code** (never write your own renderer, never draw slides another way):
