@@ -650,6 +650,73 @@ def write_video(i, overlay, path):
         raise SystemExit(f'Video failed for slide {i + 1}: {path} was not written.')
 
 
+SPORT_TAGS = {'running': 'running', 'cycling': 'cycling', 'swimming': 'swimming', 'walking': 'walking', 'hiking': 'hiking',
+              'strength': 'strengthtraining', 'hiit': 'hiit', 'yoga': 'yoga', 'rowing': 'rowing', 'paddle': 'kayaking',
+              'racket': 'padel', 'skiing': 'skiing', 'cardio': 'cardio', 'multisport': 'triathlon', 'golf': 'golf',
+              'surfing': 'surfing', 'climbing': 'climbing'}
+
+
+def captions(plan):
+    """Instagram + TikTok captions built from the computed numbers (the assistant may reword, never renumber)."""
+    meta, slides = plan['meta'], plan['slides']
+    yy = str(meta.get('year', 2026))[2:]
+    by = {s.get('key', ''): s for s in slides}
+    facts, sport = [], None
+    intro = by.get('intro')
+    if intro:
+        facts.append(f"{fmt_number(intro['hook']['number'], 1)} {intro['hook']['unit']}")
+    hero = next((s for s in slides if s.get('key', '').startswith('hero_')), None)
+    if hero:
+        sport = hero['key'][5:]
+        if hero.get('unit') == 'hours':  # non-distance sport: "146 hours of strength"
+            facts.append(f"{fmt_number(hero['number'], 1)} hours of {hero['kicker'].split(' · ')[0].lower()}")
+        else:                            # "I ran 1,198 km"
+            facts.append(f"{hero['headline']} {fmt_number(hero['number'], 1)} {hero.get('unit', '')}".strip())
+    if 'records' in by and by['records'].get('rows'):
+        r = by['records']['rows'][0]
+        hl = by['records']['headline'].replace('My ', '')
+        if hl.lower().startswith('fastest'):
+            facts.append(f"Fastest {r['label']}: {r['value']}")
+        else:                            # "Longest ride: 120 km"
+            facts.append(f"{hl[:1].upper()}{hl[1:].rstrip('s')}: {r['value']}")
+    if 'calendar' in by:
+        facts.append(by['calendar']['headline'])
+    if 'vo2max' in by:
+        facts.append(f"VO2 max {fmt_number(by['vo2max']['delta'], 1)}")
+    if 'route' in by:
+        facts.append(by['route']['body'].replace('×', '× my go-to'))
+    persona = by.get('persona', {}).get('name')
+    tags = ['#garminwrapped', f'#garminwrapped20{yy}', '#garmin']
+    if sport in SPORT_TAGS:
+        tags.append('#' + SPORT_TAGS[sport])
+    so_far = '' if str(meta.get('period', '')).isdigit() else ' (so far)'
+    ig = '\n'.join([
+        f"My Garmin Wrapped '{yy}{so_far} is here ⌚",
+        '',
+        *[f'▲ {f}' for f in facts[:5]],
+        *([f'▲ Training personality: {persona}'] if persona else []),
+        '',
+        'Swipe through my year 👉',
+        '',
+        'Made with the Garmin School prompt (@vawbe). Make your own for free: garmin.vaw.be/en/wrapped',
+        '',
+        ' '.join(tags + ['#yearinreview', '#garminschool', '#fitness']),
+    ])
+    tt_facts = ', '.join(facts[:2])
+    tt = (f"My Garmin Wrapped '{yy}{so_far}: {tt_facts}" + (f" and apparently I'm {persona.replace('The ', 'the ', 1)} 😅" if persona else '.') +
+          ' Made with the Garmin School prompt (@vaw.be) ' + ' '.join(tags + ['#fitnesstok', '#fyp']))
+    return ig, tt
+
+
+def write_captions(plan, out):
+    ig, tt = captions(plan)
+    p = os.path.join(out, 'captions.txt')
+    with open(p, 'w', encoding='utf-8') as fh:
+        fh.write('INSTAGRAM\n\n' + ig + '\n\n\nTIKTOK\n\n' + tt + '\n')
+    print('captions', p, flush=True)
+    return p
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('plan', nargs='?')
@@ -671,6 +738,7 @@ def main():
     plan = json.load(open(a.plan))
     slides = plan['slides']
     os.makedirs(a.out, exist_ok=True)
+    write_captions(plan, a.out)  # always: Instagram + TikTok captions with the real numbers
     which = [k - 1 for k in (a.slides or range(1, len(slides) + 1))]
     year = str(plan['meta'].get('year', 2026))[2:]
     for i in which:

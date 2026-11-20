@@ -53,8 +53,10 @@ Fix and re-render any slide that's wrong.
 
 **Step 5 — Deliver:** list the `out/` folder first to confirm the files exist. Then give me a download link
 for every file, in order 01 → 10 (animated: the 10 MP4s and the 10 PNGs; stills: the 10 PNGs), plus one zip
-with all of them, and a short caption for my post that ends with "Made with the Garmin School prompt (@vawbe)". Don't
-use official Garmin logos anywhere.
+with all of them. Then **always** finish with my two captions from `out/captions.txt` (the kit writes them
+with my real numbers): the **Instagram caption** and the **TikTok caption**, each in its own copyable block. You may
+make them sound more like me, but keep the numbers, the credit line (Instagram @vawbe, TikTok @vaw.be) and the
+hashtags. Don't use official Garmin logos anywhere.
 
 **Privacy (always):** no weight, BMI, body composition, menstrual or food data, no addresses, no maps. The
 route slide shows only the shape of the line, with the first and last 200 m removed.

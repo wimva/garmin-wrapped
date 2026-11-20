@@ -26,6 +26,7 @@ Garmin connector (MCP)  →  data/*.json  →  kit/compute.py  →  wrapped.json
    or OpenCV) for video; `python kit/wrapped.py --check` says what's available. Animated slides keep the data
    still and loop the moving background (6 s, seamless), one MP4 per slide plus the PNGs as a backup, about
    2 s per slide to render.
+   Every run also writes `captions.txt`: an Instagram and a TikTok caption with the real numbers.
 
 Design rules: [`STYLEGUIDE.md`](STYLEGUIDE.md).
 

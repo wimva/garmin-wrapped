@@ -96,6 +96,15 @@ never cuts a value.
 | `persona` | training personality: Early Bird, Night Owl, Hybrid Athlete, Streak Machine, Weekend Warrior, Base Builder, the {Sport} Purist, All-Rounder |
 | `cta` | make your own |
 
+## Captions
+
+`wrapped.py` always writes `out/captions.txt` with two captions built from the computed numbers:
+- **Instagram:** "My Garmin Wrapped '26 is here ⌚", up to five `▲` fact lines and the training personality,
+  "Swipe through my year 👉", the credit "Made with the Garmin School prompt (@vawbe)" + garmin.vaw.be/en/wrapped,
+  hashtags (#garminwrapped #garminwrapped2026 #garmin #<sport> …).
+- **TikTok:** one short line with two facts and the personality, the credit with @vaw.be, hashtags incl. #fyp.
+The assistant may reword them, never change a number, the credit or the hashtags.
+
 ## Don'ts
 
 - No official Garmin logos or the exact Garmin delta; triangles are always rounded and playful.
